@@ -17,8 +17,8 @@ F5 = n**f5
 F6 = n**f6
 
 eq1 = n**2 * F2 * F1
-eq2 = n**2 * F1 * n * F3 + F4* F5
-eq3 = n**2 * F1 * n * F3 + F4* F6
+eq2 = n**2 * F1 * n * F3 + F4+ F5
+eq3 = n**2 * F1 * n * F3 + F4+ F6
 
 print("eq1: ", eq1)
 print("eq2: ", eq2)
