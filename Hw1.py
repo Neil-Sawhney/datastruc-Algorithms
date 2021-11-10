@@ -23,6 +23,3 @@ eq3 = n**2 * F1 + n**2 *n * F3 + n**2 *n*F4 + n**2 *n*F6
 print("eq1: ", eq1)
 print("eq2: ", eq2)
 print("eq3: ", eq3)
- #test123
- #test234
- #bloop
