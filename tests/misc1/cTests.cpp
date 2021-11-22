@@ -10,9 +10,14 @@ void print(Data dog) { cout << dog; }
 
 
 //pointer stuff
-//taking in the address so that we can edit the actual variable
-// a pointer is a data type that holds an address (int *).  A reference is a data type that holds an address like a pointer, but spits it the value when you remove the &.  The address is accessed with &variable, the value is accesed with variable
-void pointer(int &fingie)
+/*
+	a pointer is just the address.
+	*variable derefrences and accesesses the value.
+	int* blah = variable, creates a pointer to the address of variable 
+*/
+
+//defining a reference to the varibale passed in, and naming it fingie.
+void pointer(int& fingie)
 {
  fingie++; 
 }
