@@ -122,9 +122,9 @@ map<string, string> msg = {
     {"OUTPUT", "Enter name of output file: "},
     {"PROCESS", "PROCESSING COMMAND: "},
     {"VAL_POP", "Value popped: "},
-    {"ERROR_EMPTY", "ERROR: This list is empty!\n"},
-    {"ERROR_DNE", "ERROR: This name does not exist!\n"},
-    {"ERROR_AE", "ERROR: This name already exists!\n"},
+    {"ERROR_EMPTY", "\nERROR: This list is empty!"},
+    {"ERROR_DNE", "\nERROR: This name does not exist!"},
+    {"ERROR_AE", "\nERROR: This name already exists!"},
 };
 
 // requests the user for an input name and opens the file
@@ -260,7 +260,11 @@ string pop(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
     if (findSimpleList<double>(LIST_NAME) == listSLd.end())
       throw invalid_argument("ERROR_DNE");
     SimpleList<double> * FoundList = *listCandidate;
-    return to_string(FoundList->pop());
+
+    string str = to_string(FoundList->pop());
+    str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+    str.erase(str.find_last_not_of('.') + 1, std::string::npos);
+    return str;
   }
 
   else if (DATA_TYPE == "s") {
@@ -280,11 +284,18 @@ void parse() {
   ofstream output = openOutputFile();
 
   string cLine;
+  //to skip the first run through of outputting a new line
+  bool toggle = false;
   // Grab one line at a time until we've ran every command
   while (getline(input, cLine)) {
+    //new line at the top to stop the end of file new line
+    if (toggle) {
+      output << "\n";
+    }
+    toggle = true;
 
     // processing command
-    output << msg["PROCESS"] << cLine << "\n";
+    output << msg["PROCESS"] << cLine;
 
     // Chop that line up into words and toss them into a vector
     istringstream iss(cLine);
@@ -308,7 +319,8 @@ void parse() {
         push(dataType, ingredients, listName);
       }
       else if (command == "pop") {
-        output << msg["VAL_POP"] << pop(dataType, ingredients, listName) << "\n";
+        string popVal = pop(dataType, ingredients, listName) ;
+        output << "\n" << msg["VAL_POP"] << popVal;
       }
 
     } catch (const invalid_argument &e) {
