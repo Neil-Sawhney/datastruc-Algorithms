@@ -1,15 +1,17 @@
+// Author: Neil Sawhney
+//
+// An implementation of a Singly Linked List used to parse commands from a user
+// specified input file, and output to a user specified output file.
+
 #include <algorithm>
-#include <cstddef>
 #include <fstream>
 #include <iostream>
 #include <iterator>
 #include <list>
 #include <map>
-#include <new>
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <type_traits>
 #include <vector>
 
 using namespace std;
@@ -216,29 +218,32 @@ void create(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
 // push a value to a SimpleList
 void push(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
   if (DATA_TYPE == "i") {
-    _List_iterator<SimpleList<int> *> listCandidate = findSimpleList<int>(LIST_NAME);
+    _List_iterator<SimpleList<int> *> listCandidate =
+        findSimpleList<int>(LIST_NAME);
     // if a list with that name does not exist throw an error
     if (listCandidate == listSLi.end())
       throw invalid_argument("ERROR_DNE");
-    SimpleList<int> * FoundList = *listCandidate;
+    SimpleList<int> *FoundList = *listCandidate;
     FoundList->push(stoi(INGREDIENTS));
   }
 
   else if (DATA_TYPE == "d") {
-    _List_iterator<SimpleList<double> *> listCandidate = findSimpleList<double>(LIST_NAME);
+    _List_iterator<SimpleList<double> *> listCandidate =
+        findSimpleList<double>(LIST_NAME);
     // if a list with that name does not exist throw an error
     if (findSimpleList<double>(LIST_NAME) == listSLd.end())
       throw invalid_argument("ERROR_DNE");
-    SimpleList<double> * FoundList = *listCandidate;
+    SimpleList<double> *FoundList = *listCandidate;
     FoundList->push(stod(INGREDIENTS));
   }
 
   else if (DATA_TYPE == "s") {
-    _List_iterator<SimpleList<string> *> listCandidate = findSimpleList<string>(LIST_NAME);
+    _List_iterator<SimpleList<string> *> listCandidate =
+        findSimpleList<string>(LIST_NAME);
     // if a list with that name does not exist throw an error
     if (findSimpleList<string>(LIST_NAME) == listSLs.end())
       throw invalid_argument("ERROR_DNE");
-    SimpleList<string> * FoundList = *listCandidate;
+    SimpleList<string> *FoundList = *listCandidate;
     FoundList->push(INGREDIENTS);
   }
 }
@@ -246,20 +251,22 @@ void push(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
 // pop a value from a SimpleList
 string pop(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
   if (DATA_TYPE == "i") {
-    _List_iterator<SimpleList<int> *> listCandidate = findSimpleList<int>(LIST_NAME);
+    _List_iterator<SimpleList<int> *> listCandidate =
+        findSimpleList<int>(LIST_NAME);
     // if a list with that name does not exist throw an error
     if (listCandidate == listSLi.end())
       throw invalid_argument("ERROR_DNE");
-    SimpleList<int> * FoundList = *listCandidate;
+    SimpleList<int> *FoundList = *listCandidate;
     return to_string(FoundList->pop());
   }
 
   else if (DATA_TYPE == "d") {
-    _List_iterator<SimpleList<double> *> listCandidate = findSimpleList<double>(LIST_NAME);
+    _List_iterator<SimpleList<double> *> listCandidate =
+        findSimpleList<double>(LIST_NAME);
     // if a list with that name does not exist throw an error
     if (findSimpleList<double>(LIST_NAME) == listSLd.end())
       throw invalid_argument("ERROR_DNE");
-    SimpleList<double> * FoundList = *listCandidate;
+    SimpleList<double> *FoundList = *listCandidate;
 
     string str = to_string(FoundList->pop());
     str.erase(str.find_last_not_of('0') + 1, std::string::npos);
@@ -268,11 +275,12 @@ string pop(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
   }
 
   else if (DATA_TYPE == "s") {
-    _List_iterator<SimpleList<string> *> listCandidate = findSimpleList<string>(LIST_NAME);
+    _List_iterator<SimpleList<string> *> listCandidate =
+        findSimpleList<string>(LIST_NAME);
     // if a list with that name does not exist throw an error
     if (findSimpleList<string>(LIST_NAME) == listSLs.end())
       throw invalid_argument("ERROR_DNE");
-    SimpleList<string> * FoundList = *listCandidate;
+    SimpleList<string> *FoundList = *listCandidate;
     return FoundList->pop();
   }
   return "";
@@ -284,11 +292,11 @@ void parse() {
   ofstream output = openOutputFile();
 
   string cLine;
-  //to skip the first run through of outputting a new line
+  // to skip the first run through of outputting a new line
   bool toggle = false;
   // Grab one line at a time until we've ran every command
   while (getline(input, cLine)) {
-    //new line at the top to stop the end of file new line
+    // new line at the top to stop the end of file new line
     if (toggle) {
       output << "\n";
     }
@@ -310,16 +318,14 @@ void parse() {
         (command == "pop") ? "" : tokens.at(2); //"stack" or "queue" for create.
                                                 // value for push. Null for pop
 
-    //proccess all commands, and catch any errors in the proccess
+    // proccess all commands, and catch any errors in the proccess
     try {
       if (command == "create") {
         create(dataType, ingredients, listName);
-      }
-      else if (command == "push") {
+      } else if (command == "push") {
         push(dataType, ingredients, listName);
-      }
-      else if (command == "pop") {
-        string popVal = pop(dataType, ingredients, listName) ;
+      } else if (command == "pop") {
+        string popVal = pop(dataType, ingredients, listName);
         output << "\n" << msg["VAL_POP"] << popVal;
       }
 
