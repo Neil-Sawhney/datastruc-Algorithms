@@ -14,7 +14,7 @@
 
 using namespace std;
 
-// An Abstract Base Class called SimpleList: 
+// An Abstract Base Class called SimpleList:
 template <typename Data> class SimpleList {
 private:
   // A Private Nested Class Called Node:
@@ -55,7 +55,7 @@ protected:
   Data removeFromStart();
 };
 
-// A Templated Function that inserts a node at the start of the list
+// A Function that inserts a node at the start of the list
 // returns the value pushed
 template <typename Data> Data SimpleList<Data>::insertAtStart(Data DATA) {
   // point our new node to the lists previous first node
@@ -121,7 +121,7 @@ map<string, string> msg = {
     {"INPUT", "Enter name of input file: "},
     {"OUTPUT", "Enter name of output file: "},
     {"PROCESS", "PROCESSING COMMAND: "},
-    {"VAL_POP", "Value popped: \n"},
+    {"VAL_POP", "Value popped: "},
     {"ERROR_EMPTY", "ERROR: This list is empty!\n"},
     {"ERROR_DNE", "ERROR: This name does not exist!\n"},
     {"ERROR_AE", "ERROR: This name already exists!\n"},
@@ -151,26 +151,28 @@ list<SimpleList<string> *> listSLs; // all string stacks and queues
 
 // Takes a list name as a parameter and uses it to find the simple list with
 // that name in the list of simple lists for the appropriate dataType
-template <typename Data> _List_iterator<SimpleList<Data> *> findSimpleList(string LIST_NAME) {
+template <typename Data>
+_List_iterator<SimpleList<Data> *> findSimpleList(string LIST_NAME) {
   return find_if(
       listSLi.begin(), listSLi.end(),
       [&](SimpleList<int> *const &p) { return p->listName == LIST_NAME; });
 }
-//these are almost the same, but for different datatypes
-template <> _List_iterator<SimpleList<double> *> findSimpleList(string LIST_NAME) {
+// these are almost the same, but for different datatypes
+template <>
+_List_iterator<SimpleList<double> *> findSimpleList(string LIST_NAME) {
   return find_if(
       listSLd.begin(), listSLd.end(),
       [&](SimpleList<double> *const &p) { return p->listName == LIST_NAME; });
 }
-template <> _List_iterator<SimpleList<string> *> findSimpleList(string LIST_NAME) {
+template <>
+_List_iterator<SimpleList<string> *> findSimpleList(string LIST_NAME) {
   return find_if(
       listSLs.begin(), listSLs.end(),
       [&](SimpleList<string> *const &p) { return p->listName == LIST_NAME; });
 }
 
 // create an integer stack or queue and add it do the list
-void create(string DATA_TYPE, string COMMAND, string INGREDIENTS,
-            string LIST_NAME) {
+void create(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
   if (DATA_TYPE == "i") {
     // if a list with that name exists throw an error
     if (findSimpleList<int>(LIST_NAME) != listSLi.end())
@@ -184,7 +186,7 @@ void create(string DATA_TYPE, string COMMAND, string INGREDIENTS,
     listSLi.push_front(SLi);           // add it to the list
   }
 
-  if (DATA_TYPE == "d") {
+  else if (DATA_TYPE == "d") {
     // if a list with that name exists throw an error
     if (findSimpleList<double>(LIST_NAME) != listSLd.end())
       throw invalid_argument("ERROR_AE");
@@ -197,7 +199,7 @@ void create(string DATA_TYPE, string COMMAND, string INGREDIENTS,
     listSLd.push_front(SLd);              // add it to the list
   }
 
-  if (DATA_TYPE == "s") {
+  else if (DATA_TYPE == "s") {
     // if a list with that name exists throw an error
     if (findSimpleList<string>(LIST_NAME) != listSLs.end())
       throw invalid_argument("ERROR_AE");
@@ -211,35 +213,107 @@ void create(string DATA_TYPE, string COMMAND, string INGREDIENTS,
   }
 }
 
+// push a value to a SimpleList
+void push(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
+  if (DATA_TYPE == "i") {
+    _List_iterator<SimpleList<int> *> listCandidate = findSimpleList<int>(LIST_NAME);
+    // if a list with that name does not exist throw an error
+    if (listCandidate == listSLi.end())
+      throw invalid_argument("ERROR_DNE");
+    SimpleList<int> * FoundList = *listCandidate;
+    FoundList->push(stoi(INGREDIENTS));
+  }
+
+  else if (DATA_TYPE == "d") {
+    _List_iterator<SimpleList<double> *> listCandidate = findSimpleList<double>(LIST_NAME);
+    // if a list with that name does not exist throw an error
+    if (findSimpleList<double>(LIST_NAME) == listSLd.end())
+      throw invalid_argument("ERROR_DNE");
+    SimpleList<double> * FoundList = *listCandidate;
+    FoundList->push(stod(INGREDIENTS));
+  }
+
+  else if (DATA_TYPE == "s") {
+    _List_iterator<SimpleList<string> *> listCandidate = findSimpleList<string>(LIST_NAME);
+    // if a list with that name does not exist throw an error
+    if (findSimpleList<string>(LIST_NAME) == listSLs.end())
+      throw invalid_argument("ERROR_DNE");
+    SimpleList<string> * FoundList = *listCandidate;
+    FoundList->push(INGREDIENTS);
+  }
+}
+
+// pop a value from a SimpleList
+string pop(string DATA_TYPE, string INGREDIENTS, string LIST_NAME) {
+  if (DATA_TYPE == "i") {
+    _List_iterator<SimpleList<int> *> listCandidate = findSimpleList<int>(LIST_NAME);
+    // if a list with that name does not exist throw an error
+    if (listCandidate == listSLi.end())
+      throw invalid_argument("ERROR_DNE");
+    SimpleList<int> * FoundList = *listCandidate;
+    return to_string(FoundList->pop());
+  }
+
+  else if (DATA_TYPE == "d") {
+    _List_iterator<SimpleList<double> *> listCandidate = findSimpleList<double>(LIST_NAME);
+    // if a list with that name does not exist throw an error
+    if (findSimpleList<double>(LIST_NAME) == listSLd.end())
+      throw invalid_argument("ERROR_DNE");
+    SimpleList<double> * FoundList = *listCandidate;
+    return to_string(FoundList->pop());
+  }
+
+  else if (DATA_TYPE == "s") {
+    _List_iterator<SimpleList<string> *> listCandidate = findSimpleList<string>(LIST_NAME);
+    // if a list with that name does not exist throw an error
+    if (findSimpleList<string>(LIST_NAME) == listSLs.end())
+      throw invalid_argument("ERROR_DNE");
+    SimpleList<string> * FoundList = *listCandidate;
+    return FoundList->pop();
+  }
+  return "";
+}
+
 // Parse input file, put the appropriate commands to the output file
 void parse() {
   ifstream input = openInputFile();
   ofstream output = openOutputFile();
 
-  // Grab one line from the input file
   string cLine;
-  getline(input, cLine);
+  // Grab one line at a time until we've ran every command
+  while (getline(input, cLine)) {
 
-  // processing command
-  output << msg["PROCESS"] << cLine << "\n";
+    // processing command
+    output << msg["PROCESS"] << cLine << "\n";
 
-  // Chop that line up into words and toss them into a vector
-  istringstream iss(cLine);
-  vector<string> tokens{istream_iterator<string>{iss},
-                        istream_iterator<string>{}};
+    // Chop that line up into words and toss them into a vector
+    istringstream iss(cLine);
+    vector<string> tokens{istream_iterator<string>{iss},
+                          istream_iterator<string>{}};
 
-  string listName = tokens.at(1);
-  string dataType = listName.substr(0, 1); //dataType is the first char in name
-  string command = tokens.at(0); //create, push, or pop
-  string ingredients = (command == "pop") ? "" : tokens.at(2); //"stack" or "queue" for create. value for push. Null for pop 
+    string listName = tokens.at(1);
+    string dataType =
+        listName.substr(0, 1);     // dataType is the first char in name
+    string command = tokens.at(0); // create, push, or pop
+    string ingredients =
+        (command == "pop") ? "" : tokens.at(2); //"stack" or "queue" for create.
+                                                // value for push. Null for pop
 
-  try {
+    //proccess all commands, and catch any errors in the proccess
+    try {
       if (command == "create") {
-        create(dataType, command, ingredients, listName);
+        create(dataType, ingredients, listName);
       }
-    
-  } catch (const invalid_argument &e) {
-    output << msg[e.what()];
+      else if (command == "push") {
+        push(dataType, ingredients, listName);
+      }
+      else if (command == "pop") {
+        output << msg["VAL_POP"] << pop(dataType, ingredients, listName) << "\n";
+      }
+
+    } catch (const invalid_argument &e) {
+      output << msg[e.what()];
+    }
   }
 }
 
