@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <new>
+#include <fstream>
 #include <stdexcept>
 #include <string>
 
@@ -37,9 +38,10 @@ public:
   // function declaration and implementation beacause it's the same for both
   // stacks and queues
   Data pop() { return removeFromStart(); };
+  // pure virtual push function because it differs for both stacks and queues
   virtual Data push(Data DATA) = 0;
 
-  // a simple map to make stream puts and error catching cleaner to implement
+  // a simple map to makes stream puts and error catching cleaner to implement
   static map<string, string> msg;
 
 protected:
@@ -49,12 +51,13 @@ protected:
   Data removeFromStart();
 };
 
-
-  template<typename Data> map<string,string> SimpleList<Data>::msg = {
-      {"VAL_POP", "Value popped: \n"},
-      {"ERROR_EMPTY", "ERROR: This list is empty!\n"},
-      {"ERROR_DNE", "ERROR: This name does not exist!\n"},
-  };
+// out of line definition of msg map
+template <typename Data>
+map<string, string> SimpleList<Data>::msg = {
+    {"VAL_POP", "Value popped: \n"},
+    {"ERROR_EMPTY", "ERROR: This list is empty!\n"},
+    {"ERROR_DNE", "ERROR: This name does not exist!\n"},
+};
 
 // A Templated Function that inserts a node at the start of the list
 // returns the value pushed
@@ -117,9 +120,23 @@ public:
   Data push(Data DATA) { return this->insertAtEnd(DATA); };
 };
 
+//requests the user for an input name and opens the file
+void openInputFile(){
+  string inputFile;
+  cin >> inputFile;
+  ifstream input(inputFile);
+}
 
+//requests the user for an output name and opens the file
+void openOutputFile(){
+  string outputFile;
+  cin >> outputFile;
+  ofstream output(outputFile);
+}
 
+// Parse input file, put the appropriate commands to the output file
 void handler() {
+
   SimpleList<int> *L1 = new Queue<int>("L1");
 
   try {
@@ -134,11 +151,12 @@ void handler() {
     cout << "popped: " << L1->pop() << "\n";
     cout << "popped: " << L1->pop() << "\n";
   } catch (const invalid_argument &e) {
-    cout << SimpleList<int>::msg[e.what()]; 
+    cout << SimpleList<int>::msg[e.what()];
   }
 }
 
-int main(){
-    // dont mind me just testing some stuff!
-    handler();
+int main() {
+  openInputFile();
+  openOutputFile();
+  handler();
 };

@@ -12,11 +12,11 @@ void print(Data dog) { cout << dog; }
 //pointer stuff
 /*
 	a pointer is just the address.
-	*variable derefrences and accesesses the value.
+	*variable dereferences and accesses the value.
 	int* blah = variable, creates a pointer to the address of variable 
 */
 
-//defining a reference to the varibale passed in, and naming it fingie.
+//defining a reference to the variable passed in, and naming it fingie.
 void pointer(int& fingie)
 {
  fingie++; 
