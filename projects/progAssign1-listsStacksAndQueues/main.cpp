@@ -1,13 +1,20 @@
+#include <algorithm>
+#include <cstddef>
+#include <fstream>
 #include <iostream>
+#include <iterator>
+#include <list>
 #include <map>
 #include <new>
-#include <fstream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
+#include <type_traits>
+#include <vector>
 
 using namespace std;
 
-// An Abstract Templated SimpleList Base Class:
+// An Abstract Base Class called SimpleList: 
 template <typename Data> class SimpleList {
 private:
   // A Private Nested Class Called Node:
@@ -16,8 +23,7 @@ private:
     Data data;
     Node *next;
 
-    // constructor for Node accepts data and pointer, if no pointer is provided
-    // it is defaulted to NULL
+    // constructor for Node
     Node(Data DATA, Node *NEXT = nullptr) {
       data = DATA;
       next = NEXT;
@@ -33,6 +39,7 @@ public:
   int size = 0;
   string listName;
 
+  // constructor for SimpleList
   SimpleList(string LISTNAME = NULL) { this->listName = LISTNAME; }
 
   // function declaration and implementation beacause it's the same for both
@@ -41,22 +48,11 @@ public:
   // pure virtual push function because it differs for both stacks and queues
   virtual Data push(Data DATA) = 0;
 
-  // a simple map to makes stream puts and error catching cleaner to implement
-  static map<string, string> msg;
-
 protected:
   // functions that manipulate nodes to be used for push and pop
   Data insertAtStart(Data DATA);
   Data insertAtEnd(Data DATA);
   Data removeFromStart();
-};
-
-// out of line definition of msg map
-template <typename Data>
-map<string, string> SimpleList<Data>::msg = {
-    {"VAL_POP", "Value popped: \n"},
-    {"ERROR_EMPTY", "ERROR: This list is empty!\n"},
-    {"ERROR_DNE", "ERROR: This name does not exist!\n"},
 };
 
 // A Templated Function that inserts a node at the start of the list
@@ -73,8 +69,8 @@ template <typename Data> Data SimpleList<Data>::insertAtStart(Data DATA) {
   return (DATA);
 }
 
-// A Templated Function that inserts a node at the end of the list
-// returns the value popped
+// Inserts a node at the end of the list
+// Returns the value popped
 template <typename Data> Data SimpleList<Data>::insertAtEnd(Data DATA) {
   if (size == 0)
     insertAtStart(DATA);
@@ -89,8 +85,8 @@ template <typename Data> Data SimpleList<Data>::insertAtEnd(Data DATA) {
   return (DATA);
 }
 
-// A Templated Function that removes a node at the start of the list
-// returns the data removed, or NULL if passed an empty list
+// Removes a node at the start of the list
+// returns the data removed, or throws an error if passed an empty list
 template <typename Data> Data SimpleList<Data>::removeFromStart() {
   Node *tmp = first;
   // empty list
@@ -104,7 +100,7 @@ template <typename Data> Data SimpleList<Data>::removeFromStart() {
   return removedData;
 }
 
-// A Templated Stack Class That Inherits SimpleList
+// A Stack Class That Inherits SimpleList
 // Pushes to start and pops from start
 template <typename Data> class Stack : public SimpleList<Data> {
 public:
@@ -112,7 +108,7 @@ public:
   Data push(Data DATA) { return this->insertAtStart(DATA); };
 };
 
-// A Templated Queue Class That Inherits SimpleList
+// A Queue Class That Inherits SimpleList
 // Pushes to end and pops from start
 template <typename Data> class Queue : public SimpleList<Data> {
 public:
@@ -120,43 +116,131 @@ public:
   Data push(Data DATA) { return this->insertAtEnd(DATA); };
 };
 
-//requests the user for an input name and opens the file
-void openInputFile(){
+// A map to make stream puts and error catching less messy to remember
+map<string, string> msg = {
+    {"INPUT", "Enter name of input file: "},
+    {"OUTPUT", "Enter name of output file: "},
+    {"PROCESS", "PROCESSING COMMAND: "},
+    {"VAL_POP", "Value popped: \n"},
+    {"ERROR_EMPTY", "ERROR: This list is empty!\n"},
+    {"ERROR_DNE", "ERROR: This name does not exist!\n"},
+    {"ERROR_AE", "ERROR: This name already exists!\n"},
+};
+
+// requests the user for an input name and opens the file
+ifstream openInputFile() {
   string inputFile;
+  cout << msg["INPUT"];
   cin >> inputFile;
-  ifstream input(inputFile);
+  ifstream INPUT(inputFile);
+  return INPUT;
 }
 
-//requests the user for an output name and opens the file
-void openOutputFile(){
+// requests the user for an output name and opens the file
+ofstream openOutputFile() {
   string outputFile;
+  cout << msg["OUTPUT"];
   cin >> outputFile;
-  ofstream output(outputFile);
+  ofstream OUTPUT(outputFile);
+  return OUTPUT;
 }
 
-// Parse input file, put the appropriate commands to the output file
-void handler() {
+list<SimpleList<int> *> listSLi;    // all integer stacks and queues
+list<SimpleList<double> *> listSLd; // all double stacks and queues
+list<SimpleList<string> *> listSLs; // all string stacks and queues
 
-  SimpleList<int> *L1 = new Queue<int>("L1");
+// Takes a list name as a parameter and uses it to find the simple list with
+// that name in the list of simple lists for the appropriate dataType
+template <typename Data> _List_iterator<SimpleList<Data> *> findSimpleList(string LIST_NAME) {
+  return find_if(
+      listSLi.begin(), listSLi.end(),
+      [&](SimpleList<int> *const &p) { return p->listName == LIST_NAME; });
+}
+//these are almost the same, but for different datatypes
+template <> _List_iterator<SimpleList<double> *> findSimpleList(string LIST_NAME) {
+  return find_if(
+      listSLd.begin(), listSLd.end(),
+      [&](SimpleList<double> *const &p) { return p->listName == LIST_NAME; });
+}
+template <> _List_iterator<SimpleList<string> *> findSimpleList(string LIST_NAME) {
+  return find_if(
+      listSLs.begin(), listSLs.end(),
+      [&](SimpleList<string> *const &p) { return p->listName == LIST_NAME; });
+}
 
-  try {
-    cout << "pushed: " << L1->push(1) << "\n";
-    cout << "pushed: " << L1->push(2) << "\n";
-    cout << "pushed: " << L1->push(3) << "\n";
-    cout << "pushed: " << L1->push(4) << "\n";
+// create an integer stack or queue and add it do the list
+void create(string DATA_TYPE, string COMMAND, string INGREDIENTS,
+            string LIST_NAME) {
+  if (DATA_TYPE == "i") {
+    // if a list with that name exists throw an error
+    if (findSimpleList<int>(LIST_NAME) != listSLi.end())
+      throw invalid_argument("ERROR_AE");
 
-    cout << "popped: " << L1->pop() << "\n";
-    cout << "popped: " << L1->pop() << "\n";
-    cout << "popped: " << L1->pop() << "\n";
-    cout << "popped: " << L1->pop() << "\n";
-    cout << "popped: " << L1->pop() << "\n";
-  } catch (const invalid_argument &e) {
-    cout << SimpleList<int>::msg[e.what()];
+    SimpleList<int> *SLi;
+    if (INGREDIENTS == "queue")
+      SLi = new Queue<int>(LIST_NAME); // create a new queue
+    else
+      SLi = new Stack<int>(LIST_NAME); // create a new stack
+    listSLi.push_front(SLi);           // add it to the list
+  }
+
+  if (DATA_TYPE == "d") {
+    // if a list with that name exists throw an error
+    if (findSimpleList<double>(LIST_NAME) != listSLd.end())
+      throw invalid_argument("ERROR_AE");
+
+    SimpleList<double> *SLd;
+    if (INGREDIENTS == "queue")
+      SLd = new Queue<double>(LIST_NAME); // create a new queue
+    else
+      SLd = new Stack<double>(LIST_NAME); // create a new stack
+    listSLd.push_front(SLd);              // add it to the list
+  }
+
+  if (DATA_TYPE == "s") {
+    // if a list with that name exists throw an error
+    if (findSimpleList<string>(LIST_NAME) != listSLs.end())
+      throw invalid_argument("ERROR_AE");
+
+    SimpleList<string> *SLs;
+    if (INGREDIENTS == "queue")
+      SLs = new Queue<string>(LIST_NAME); // create a new queue
+    else
+      SLs = new Stack<string>(LIST_NAME); // create a new stack
+    listSLs.push_front(SLs);              // add it to the list
   }
 }
 
-int main() {
-  openInputFile();
-  openOutputFile();
-  handler();
-};
+// Parse input file, put the appropriate commands to the output file
+void parse() {
+  ifstream input = openInputFile();
+  ofstream output = openOutputFile();
+
+  // Grab one line from the input file
+  string cLine;
+  getline(input, cLine);
+
+  // processing command
+  output << msg["PROCESS"] << cLine << "\n";
+
+  // Chop that line up into words and toss them into a vector
+  istringstream iss(cLine);
+  vector<string> tokens{istream_iterator<string>{iss},
+                        istream_iterator<string>{}};
+
+  string listName = tokens.at(1);
+  string dataType = listName.substr(0, 1); //dataType is the first char in name
+  string command = tokens.at(0); //create, push, or pop
+  string ingredients = (command == "pop") ? "" : tokens.at(2); //"stack" or "queue" for create. value for push. Null for pop 
+
+  try {
+      if (command == "create") {
+        create(dataType, command, ingredients, listName);
+      }
+    
+  } catch (const invalid_argument &e) {
+    output << msg[e.what()];
+  }
+}
+
+int main() { parse(); };
