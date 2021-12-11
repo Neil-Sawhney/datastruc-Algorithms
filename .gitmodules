@@ -4,3 +4,6 @@
 [submodule "DSA"]
 	path = DSA
 	url = git@github.com:jakekali/DSA.git
+[submodule "jacobsFIles"]
+	path = jacobsFIles
+	url = git@github.com:jakekali/DSA.git
