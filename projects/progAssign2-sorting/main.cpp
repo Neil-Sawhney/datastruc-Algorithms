@@ -111,7 +111,7 @@ int main() {
 // You may add global variables, functions, and/or
 // class defintions here if you wish.
 
-bool firstNameComparator(Data * p1, Data * p2) {
+bool firstNameComparator(Data *p1, Data *p2) {
   return (p2->firstName > p1->firstName);
 }
 
@@ -121,45 +121,74 @@ int tWhat(list<Data *> &l) {
     return 1;
   }
 
-
   list<Data *>::iterator it = l.begin(); // create an iterator
 
-  if(!is_sorted(it, next(it, 20), firstNameComparator)){
+  if (!is_sorted(it, next(it, 20), firstNameComparator)) {
     return 2;
   };
 
   // if the 50th first name is the same as the 1st firstname, its t4
-  if ((*next(it,50))->firstName == (*it)->firstName) {
+  if ((*next(it, 50))->firstName == (*it)->firstName) {
     return 4;
   }
-   return 3;
+  return 3;
 }
 
-bool case1Comparator(Data * p1, Data * p2) {
-  if (p2->lastName > p1->lastName) return true;
-  if (p2->lastName < p1->lastName) return false;
-  if (p2->firstName > p1->firstName) return true; 
-  if (p2->firstName < p1->firstName) return false; 
+bool case1Comparator(Data *p1, Data *p2) {
+  if (p2->lastName > p1->lastName)
+    return true;
+  if (p2->lastName < p1->lastName)
+    return false;
+  if (p2->firstName > p1->firstName)
+    return true;
+  if (p2->firstName < p1->firstName)
+    return false;
   return (p2->ssn > p1->ssn);
 }
+
+bool case3Comparator(Data *p1, Data *p2) { return (p2->ssn > p1->ssn); }
+
+bool case4Comparator(Data *p1, Data *p2) { return (p2->ssn > p1->ssn); }
 
 void sortDataList(list<Data *> &l) {
   // Fill this in
   int fileType = tWhat(l);
-  cout << "Detected file type is T" << fileType << "\n"; //COMMENT
+  // cout << "Detected file type is T" << fileType << "\n"; //COMMENT
 
   switch (fileType) {
   case 1:
-    l.sort(case1Comparator);
+    l.sort([](Data *p1, Data *p2) {
+      if (p2->lastName > p1->lastName)
+        return true;
+      if (p2->lastName < p1->lastName)
+        return false;
+      if (p2->firstName > p1->firstName)
+        return true;
+      if (p2->firstName < p1->firstName)
+        return false;
+      return (p2->ssn > p1->ssn);
+    });
+
     break;
   case 2:
-    l.sort(case1Comparator);
+    l.sort([](Data *p1, Data *p2) {
+      if (p2->lastName > p1->lastName)
+        return true;
+      if (p2->lastName < p1->lastName)
+        return false;
+      if (p2->firstName > p1->firstName)
+        return true;
+      if (p2->firstName < p1->firstName)
+        return false;
+      return (p2->ssn > p1->ssn);
+    });
+
     break;
   case 3:
-    l.sort(case1Comparator);
+    l.sort([](Data *p1, Data *p2) { return (p2->ssn > p1->ssn); });
     break;
   case 4:
-    l.sort(case1Comparator);
-    break; 
+    l.sort([](Data *p1, Data *p2) { return (p2->ssn > p1->ssn); });
+    break;
   }
 }
