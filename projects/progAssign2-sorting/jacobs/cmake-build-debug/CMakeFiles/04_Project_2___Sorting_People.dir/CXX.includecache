@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/Jacob/Documents/GitHub/DSA/04 Project 2 - Sorting People/main.cpp
+iostream
+-
+fstream
+-
+sstream
+-
+list
+-
+vector
+-
+string
+-
+algorithm
+-
+ctime
+-
+cmath
+-
+cstring
+-
+cctype
+-
+cstdlib
+-
+map
+-
+unordered_map
+-
+

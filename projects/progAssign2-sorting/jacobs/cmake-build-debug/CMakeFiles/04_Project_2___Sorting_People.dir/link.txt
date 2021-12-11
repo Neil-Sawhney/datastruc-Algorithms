@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/04_Project_2___Sorting_People.dir/main.cpp.o  -o 04_Project_2___Sorting_People.exe -Wl,--out-implib,lib04_Project_2___Sorting_People.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

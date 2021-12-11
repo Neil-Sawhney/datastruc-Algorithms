@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="04_Project_2___Sorting_People" targetName="04_Project_2___Sorting_People" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f9787807-001f-46e8-93a3-da79ee2e3b9c" name="Default Changelist" comment="" />
+    <list id="c8d53b17-0a2e-4f2d-889f-43821230612f" name="Changes by Joey" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1rZa7hEBk3toEhu8o1W4pmwzuXE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/out_sample2.txt" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/out_sample2.txt" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jacob\Documents\GitHub\DSA\04 Project 2 - Sorting People" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="04_Project_2___Sorting_People" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="04_Project_2___Sorting_People" TARGET_NAME="04_Project_2___Sorting_People" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="04_Project_2___Sorting_People" RUN_TARGET_NAME="04_Project_2___Sorting_People">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f9787807-001f-46e8-93a3-da79ee2e3b9c" name="Default Changelist" comment="" />
+      <created>1619185901810</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619185901810</updated>
+      <workItem from="1619185904965" duration="12438000" />
+      <workItem from="1619369501784" duration="5395000" />
+      <workItem from="1619376685162" duration="4426000" />
+      <workItem from="1619383148286" duration="4294000" />
+      <workItem from="1619633504084" duration="7163000" />
+      <workItem from="1619644040035" duration="218000" />
+      <workItem from="1619977378593" duration="8352000" />
+      <workItem from="1620310332366" duration="3269000" />
+      <workItem from="1620339941183" duration="2813000" />
+      <workItem from="1620350682204" duration="2448000" />
+      <workItem from="1620416456232" duration="50000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>167</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/listcreator.py</url>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="x[1]" />
+        <watch expression="x" />
+        <watch expression="x" />
+        <watch expression="l[9]" />
+        <watch expression="pointer" language="ObjectiveC" />
+        <watch expression="l[6]" />
+        <watch expression="l[6]" />
+        <watch expression="lastMap[last[0]]" language="ObjectiveC" />
+        <watch expression="lastMap[&quot;ACOSTA&quot;].size();" language="ObjectiveC" />
+        <watch expression="firstMap[&quot;AARON&quot;];" language="ObjectiveC" />
+        <watch expression="last" language="ObjectiveC" />
+        <watch expression="l[134]" />
+        <watch expression="l[1]" />
+        <watch expression="l[8]" />
+        <watch expression="lester" language="ObjectiveC" />
+        <watch expression="first" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
