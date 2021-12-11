@@ -134,18 +134,37 @@ int tWhat(list<Data *> &l) {
   }
    return 3;
 }
+bool compare_nocase (const std::string& first, const std::string& second)
+{
+  unsigned int i=0;
+  while ( (i<first.length()) && (i<second.length()) )
+  {
+    if (tolower(first[i])<tolower(second[i])) return true;
+    else if (tolower(first[i])>tolower(second[i])) return false;
+    ++i;
+  }
+  return ( first.length() < second.length() );
+}
+
+
+bool lastNameComparator(Data * p1, Data * p2) {
+  return (p2->firstName > p1->firstName);
+}
 
 void sortDataList(list<Data *> &l) {
   // Fill this in
   int fileType = tWhat(l);
   cout << "Detected file type is T" << fileType << "\n"; //COMMENT
 
-//  switch (fileType) {
-//  case 1:
-//    sort(l.begin(), l.end());
-//    break;
-//  case 2:
-//    sort(l.begin(), l.end());
-//    break;
-//  }
+  switch (fileType) {
+  case 1:
+    l.sort(firstNameComparator);
+    break;
+  case 2:
+    break;
+  case 3:
+    break;
+  case 4:
+    break; 
+  }
 }
