@@ -134,21 +134,13 @@ int tWhat(list<Data *> &l) {
   }
    return 3;
 }
-bool compare_nocase (const std::string& first, const std::string& second)
-{
-  unsigned int i=0;
-  while ( (i<first.length()) && (i<second.length()) )
-  {
-    if (tolower(first[i])<tolower(second[i])) return true;
-    else if (tolower(first[i])>tolower(second[i])) return false;
-    ++i;
-  }
-  return ( first.length() < second.length() );
-}
 
-
-bool lastNameComparator(Data * p1, Data * p2) {
-  return (p2->firstName > p1->firstName);
+bool case1Comparator(Data * p1, Data * p2) {
+  if (p2->lastName > p1->lastName) return true;
+  if (p2->lastName < p1->lastName) return false;
+  if (p2->firstName > p1->firstName) return true; 
+  if (p2->firstName < p1->firstName) return false; 
+  return (p2->ssn > p1->ssn);
 }
 
 void sortDataList(list<Data *> &l) {
@@ -158,7 +150,7 @@ void sortDataList(list<Data *> &l) {
 
   switch (fileType) {
   case 1:
-    l.sort(firstNameComparator);
+    l.sort(case1Comparator);
     break;
   case 2:
     break;
