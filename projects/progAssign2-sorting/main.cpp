@@ -143,10 +143,18 @@ bool case1Comparator(Data * p1, Data * p2) {
   return (p2->ssn > p1->ssn);
 }
 
+bool case3Comparator(Data * p1, Data * p2) {
+  return (p2->ssn > p1->ssn);
+}
+
+bool case4Comparator(Data * p1, Data * p2) {
+  return (p2->ssn > p1->ssn);
+}
+
 void sortDataList(list<Data *> &l) {
   // Fill this in
   int fileType = tWhat(l);
-  cout << "Detected file type is T" << fileType << "\n"; //COMMENT
+  //cout << "Detected file type is T" << fileType << "\n"; //COMMENT
 
   switch (fileType) {
   case 1:
@@ -156,10 +164,10 @@ void sortDataList(list<Data *> &l) {
     l.sort(case1Comparator);
     break;
   case 3:
-    l.sort(case1Comparator);
+    l.sort(case3Comparator);
     break;
   case 4:
-    l.sort(case1Comparator);
+    l.sort(case4Comparator);
     break; 
   }
 }
