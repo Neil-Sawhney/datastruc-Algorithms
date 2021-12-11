@@ -153,10 +153,13 @@ void sortDataList(list<Data *> &l) {
     l.sort(case1Comparator);
     break;
   case 2:
+    l.sort(case1Comparator);
     break;
   case 3:
+    l.sort(case1Comparator);
     break;
   case 4:
+    l.sort(case1Comparator);
     break; 
   }
 }
