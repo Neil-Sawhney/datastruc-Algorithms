@@ -5,19 +5,7 @@ using namespace std;
 void radix_sort(int arr[], int n){
  
     // Step 1: Find the maxumum element
-    int maximum = arr[0];
- 
-    for(int i=1;i<n;i++){
-        maximum = max(maximum, arr[i]);
-    }
- 
-    // Step 2: Count the number of digits of the maximum number
-    int digits = 0;
- 
-    while(maximum > 0){
-        digits++;
-        maximum /= 10;
-    }
+    int digits = 9;
  
     // Step 3, 4, 5: Arrange the numbers on the basis of digits
     for(int i=0;i<digits;i++){
@@ -75,7 +63,7 @@ void radix_sort(int arr[], int n){
 int main(){
  
     // The array containing values to be sorted
-    int arr[] = {15, 120, 53, 36, 167, 81, 75, 32, 9, 60};
+    int arr[] = {797042187,551882321,861771117,458774308,858797218,311279126,593200959,249828472,151750292};
  
     // Size of the array
     int n = sizeof(arr)/sizeof(arr[0]);

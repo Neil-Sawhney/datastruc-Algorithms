@@ -152,12 +152,10 @@ void radix_sort(list<Data *> l) {
     int temp;
     happystream >> temp;
     arr[i] = temp;
-    cout << (*it)->ssn << '\n';
-    cout << arr[i] << '\n';
     advance(it,1);
+    happystream.clear();
   }
 
-  int max = 10;
   int digits = 9;
   int n = l.size();
 
@@ -199,6 +197,16 @@ void radix_sort(list<Data *> l) {
       new_array[count[num] - 1] = arr[j];
       count[num]--;
     }
+    // Printing the unsorted array
+    for(int j=0;j<10;j++)
+        cout<<arr[j]<<" ";
+ 
+    cout<<endl;
+    // Printing the sorted array
+    for(int j=0;j<10;j++)
+        cout<<new_array[j]<<" ";
+ 
+    cout<<endl;
 
     // Updating the list using New Array
     int j = 0;
