@@ -630,7 +630,6 @@ void sortDataList(list<Data *> &l) {
 
   list<int> offsetsLists1 = {0};
   for (int i = 1; i < dataSize; i++) {
-    if (vec[i]->firstNameOrder == vec[i - 1]->firstNameOrder &&
         vec[i]->lastNameOrder == vec[i - 1]->lastNameOrder) {
       continue;
     }
