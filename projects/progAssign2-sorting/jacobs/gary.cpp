@@ -585,7 +585,7 @@ int max_digit(field type) {
   return 2;
 }
 
-void americanFlagSort(myData **v, int start, int end, field type) {
+void RadixSort(myData **v, int start, int end, field type) {
   int md = max_digit(type);
   _recurseAmericanFlagSort(v, start, end, md, md, type);
 }
@@ -613,7 +613,7 @@ void sortDataList(list<Data *> &l) {
     };
   }
 
-  americanFlagSort(vec, 0, dataSize, field::lastName);
+  RadixSort(vec, 0, dataSize, field::lastName);
   list<int> offsetsLists = {0};
   for (int i = 1; i < dataSize; i++) {
     if (vec[i]->lastNameOrder == vec[i - 1]->lastNameOrder) {
@@ -625,7 +625,7 @@ void sortDataList(list<Data *> &l) {
 
   for (auto it = next(offsetsLists.begin()); it != offsetsLists.end(); it++) {
     auto p = prev(it);
-    americanFlagSort(vec, *p, *it, field::firstName);
+    RadixSort(vec, *p, *it, field::firstName);
   }
 
   list<int> offsetsLists1 = {0};
@@ -639,7 +639,7 @@ void sortDataList(list<Data *> &l) {
   offsetsLists1.push_back(dataSize);
 
   for (auto it = next(offsetsLists1.begin()); it != offsetsLists1.end(); it++) {
-    americanFlagSort(vec, *prev(it), *it, field::ssn);
+    RadixSort(vec, *prev(it), *it, field::ssn);
   }
 
   l.clear();
