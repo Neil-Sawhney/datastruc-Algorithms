@@ -134,6 +134,80 @@ int tWhat(list<Data *> &l) {
   return 3;
 }
 
+// Function that performs Radix Sort
+void radix_sort(list<Data *> l) {
+
+  // create a vector of ssn's
+  int arr[l.size()];
+
+// create a list of all ssns
+  auto it = l.begin();
+  stringstream happystream;
+  string happyoutput;
+  for (int i = 0; i < l.size(); ++i) {
+    happyoutput = (*it)->ssn;
+    happyoutput.erase(3,1);
+    happyoutput.erase(5,1);
+    happystream << happyoutput;
+    int temp;
+    happystream >> temp;
+    arr[i] = temp;
+    cout << (*it)->ssn << '\n';
+    cout << arr[i] << '\n';
+    advance(it,1);
+  }
+
+  int max = 10;
+  int digits = 9;
+  int n = l.size();
+
+  // Step 3, 4, 5: Arrange the numbers on the basis of digits
+  for (int i = 0; i < digits; i++) {
+
+    // Units/Tens/Hundreds - used to determine which digit
+    int power = pow(10, i);
+
+    // Holds the updated array
+    int new_array[n];
+
+    // Counting Sort Array - required for arranging digits [0-9]
+    int count[10];
+
+    // Initializing Count Array
+    memset(count, 0, sizeof(count));
+
+    // Calculating frequency of digits
+    for (int j = 0; j < n; j++) {
+
+      // The digit under consideration in this iteration
+      int num = (arr[j] / power) % 10;
+
+      count[num]++;
+    }
+
+    // Cumulative frequency of count array
+    for (int j = 1; j < 10; j++) {
+      count[j] += count[j - 1];
+    }
+
+    // Designating new positions in the updated array
+    for (int j = n - 1; j >= 0; j--) {
+
+      // The digit under consideration in this iteration
+      int num = (arr[j] / power) % 10;
+
+      new_array[count[num] - 1] = arr[j];
+      count[num]--;
+    }
+
+    // Updating the list using New Array
+    int j = 0;
+    for (auto it : l) {
+    it->ssn = new_array[j];
+    j++;
+    }
+  }
+}
 
 void sortDataList(list<Data *> &l) {
   // Fill this in
@@ -153,8 +227,8 @@ void sortDataList(list<Data *> &l) {
         return false;
       return (p2->ssn > p1->ssn);
     });
-
     break;
+
   case 2:
     l.sort([](Data *p1, Data *p2) {
       if (p2->lastName > p1->lastName)
@@ -167,13 +241,14 @@ void sortDataList(list<Data *> &l) {
         return false;
       return (p2->ssn > p1->ssn);
     });
-
     break;
+
   case 3:
     l.sort([](Data *p1, Data *p2) { return (p2->ssn > p1->ssn); });
     break;
+
   case 4:
-    l.sort([](Data *p1, Data *p2) { return (p2->ssn > p1->ssn); });
+    radix_sort(l);
     break;
   }
 }
