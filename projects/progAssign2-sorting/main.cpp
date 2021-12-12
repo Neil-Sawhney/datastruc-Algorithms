@@ -134,40 +134,11 @@ int tWhat(list<Data *> &l) {
   return 3;
 }
 
-bool case1Comparator(Data *p1, Data *p2) {
-  if (p2->lastName > p1->lastName)
-    return true;
-  if (p2->lastName < p1->lastName)
-    return false;
-  if (p2->firstName > p1->firstName)
-    return true;
-  if (p2->firstName < p1->firstName)
-    return false;
-  return (p2->ssn > p1->ssn);
-}
-
-<<<<<<< HEAD
-bool case3Comparator(Data *p1, Data *p2) { return (p2->ssn > p1->ssn); }
-
-bool case4Comparator(Data *p1, Data *p2) { return (p2->ssn > p1->ssn); }
-=======
-bool case3Comparator(Data * p1, Data * p2) {
-  return (p2->ssn > p1->ssn);
-}
-
-bool case4Comparator(Data * p1, Data * p2) {
-  return (p2->ssn > p1->ssn);
-}
->>>>>>> 2bb9c6383ae50e9206684b203ce9c7f0617fb634
 
 void sortDataList(list<Data *> &l) {
   // Fill this in
   int fileType = tWhat(l);
-<<<<<<< HEAD
   // cout << "Detected file type is T" << fileType << "\n"; //COMMENT
-=======
-  //cout << "Detected file type is T" << fileType << "\n"; //COMMENT
->>>>>>> 2bb9c6383ae50e9206684b203ce9c7f0617fb634
 
   switch (fileType) {
   case 1:
@@ -199,18 +170,10 @@ void sortDataList(list<Data *> &l) {
 
     break;
   case 3:
-<<<<<<< HEAD
     l.sort([](Data *p1, Data *p2) { return (p2->ssn > p1->ssn); });
     break;
   case 4:
     l.sort([](Data *p1, Data *p2) { return (p2->ssn > p1->ssn); });
     break;
-=======
-    l.sort(case3Comparator);
-    break;
-  case 4:
-    l.sort(case4Comparator);
-    break; 
->>>>>>> 2bb9c6383ae50e9206684b203ce9c7f0617fb634
   }
 }
