@@ -1,5 +1,4 @@
 #!/bin/bash
-g++ main.cpp
 
 ./a.out << bloop 
 sample1.txt
