@@ -110,12 +110,10 @@ int main() {
 
 // You may add global variables, functions, and/or
 // class defintions here if you wish.
-#include <iterator>
 #include <map>
 #include <unordered_map>
-#include <vector>
 
-const string last[500] = {
+const string lastNamesString[500] = {
     "ACOSTA",     "ADAMS",      "ADKINS",     "AGUILAR",     "AGUIRRE",
     "ALEXANDER",  "ALLEN",      "ALVARADO",   "ALVAREZ",     "ANDERSON",
     "ANDREWS",    "ARMSTRONG",  "ARNOLD",     "AUSTIN",      "AVILA",
@@ -216,7 +214,8 @@ const string last[500] = {
     "WILLIAMSON", "WILLIS",     "WILSON",     "WISE",        "WOLF",
     "WOLFE",      "WONG",       "WOOD",       "WOODS",       "WRIGHT",
     "WU",         "YANG",       "YOUNG",      "ZHANG",       "ZIMMERMAN"};
-const string first[500] = {
+
+const string firstNamesString[500] = {
     "AALIYAH",   "AARON",     "ABEL",      "ABIGAIL",   "ABRAHAM",
     "ADALINE",   "ADALYN",    "ADALYNN",   "ADAM",      "ADDISON",
     "ADELINE",   "ADELYN",    "ADRIAN",    "ADRIANA",   "AIDAN",
@@ -317,7 +316,7 @@ const string first[500] = {
     "XAVIER",    "XIMENA",    "ZACHARY",   "ZANDER",    "ZANE",
     "ZAYDEN",    "ZION",      "ZOE",       "ZOEY"};
 
-unordered_map<string, vector<Data *>> firstMap = {
+unordered_map<string, vector<Data *>> firstNamesNumberedMap = {
     {"AALIYAH", vector<Data *>()},   {"AARON", vector<Data *>()},
     {"ABEL", vector<Data *>()},      {"ABIGAIL", vector<Data *>()},
     {"ABRAHAM", vector<Data *>()},   {"ADALINE", vector<Data *>()},
@@ -565,7 +564,7 @@ unordered_map<string, vector<Data *>> firstMap = {
     {"ZANDER", vector<Data *>()},    {"ZANE", vector<Data *>()},
     {"ZAYDEN", vector<Data *>()},    {"ZION", vector<Data *>()},
     {"ZOE", vector<Data *>()},       {"ZOEY", vector<Data *>()}};
-unordered_map<string, vector<Data *>> lastMap = {
+unordered_map<string, vector<Data *>> secondNamesMap = {
     {"ACOSTA", vector<Data *>()},      {"ADAMS", vector<Data *>()},
     {"ADKINS", vector<Data *>()},      {"AGUILAR", vector<Data *>()},
     {"AGUIRRE", vector<Data *>()},     {"ALEXANDER", vector<Data *>()},
@@ -817,7 +816,174 @@ unordered_map<string, vector<Data *>> lastMap = {
     {"YANG", vector<Data *>()},        {"YOUNG", vector<Data *>()},
     {"ZHANG", vector<Data *>()},       {"ZIMMERMAN", vector<Data *>()}};
 Data xst[500];
-unordered_map<string, unsigned int> lastNamesOrdered = {
+unordered_map<string, int> firstNamesOrdered = {
+    {"AALIYAH", 0},     {"AARON", 1},       {"ABEL", 2},
+    {"ABIGAIL", 3},     {"ABRAHAM", 4},     {"ADALINE", 5},
+    {"ADALYN", 6},      {"ADALYNN", 7},     {"ADAM", 8},
+    {"ADDISON", 9},     {"ADELINE", 10},    {"ADELYN", 11},
+    {"ADRIAN", 12},     {"ADRIANA", 13},    {"AIDAN", 14},
+    {"AIDEN", 15},      {"ALAINA", 16},     {"ALAN", 17},
+    {"ALANA", 18},      {"ALAYNA", 19},     {"ALEJANDRO", 20},
+    {"ALEX", 21},       {"ALEXA", 22},      {"ALEXANDER", 23},
+    {"ALEXANDRA", 24},  {"ALEXIS", 25},     {"ALICE", 26},
+    {"ALINA", 27},      {"ALIVIA", 28},     {"ALIYAH", 29},
+    {"ALLISON", 30},    {"ALYSSA", 31},     {"AMARA", 32},
+    {"AMAYA", 33},      {"AMELIA", 34},     {"AMIR", 35},
+    {"AMY", 36},        {"ANA", 37},        {"ANASTASIA", 38},
+    {"ANDREA", 39},     {"ANDRES", 40},     {"ANDREW", 41},
+    {"ANGEL", 42},      {"ANGELA", 43},     {"ANGELINA", 44},
+    {"ANNA", 45},       {"ANNABELLE", 46},  {"ANTHONY", 47},
+    {"ANTONIO", 48},    {"ARABELLA", 49},   {"ARIA", 50},
+    {"ARIANA", 51},     {"ARIANNA", 52},    {"ARIEL", 53},
+    {"ARTHUR", 54},     {"ARYA", 55},       {"ASHER", 56},
+    {"ASHLEY", 57},     {"ASHTON", 58},     {"ATHENA", 59},
+    {"AUBREE", 60},     {"AUBREY", 61},     {"AUDREY", 62},
+    {"AUGUST", 63},     {"AURORA", 64},     {"AUSTIN", 65},
+    {"AUTUMN", 66},     {"AVA", 67},        {"AVERY", 68},
+    {"AXEL", 69},       {"AYDEN", 70},      {"AYLA", 71},
+    {"BAILEY", 72},     {"BARRETT", 73},    {"BEAU", 74},
+    {"BECKETT", 75},    {"BELLA", 76},      {"BENJAMIN", 77},
+    {"BENNETT", 78},    {"BENTLEY", 79},    {"BLAKE", 80},
+    {"BRADLEY", 81},    {"BRADY", 82},      {"BRANDON", 83},
+    {"BRANTLEY", 84},   {"BRAXTON", 85},    {"BRAYDEN", 86},
+    {"BRIAN", 87},      {"BRIANNA", 88},    {"BRIELLE", 89},
+    {"BRODY", 90},      {"BROOKE", 91},     {"BROOKLYN", 92},
+    {"BROOKLYNN", 93},  {"BROOKS", 94},     {"BRYAN", 95},
+    {"BRYCE", 96},      {"BRYNLEE", 97},    {"BRYSON", 98},
+    {"CADEN", 99},      {"CALEB", 100},     {"CALLIE", 101},
+    {"CALVIN", 102},    {"CAMDEN", 103},    {"CAMERON", 104},
+    {"CAMILA", 105},    {"CARLOS", 106},    {"CAROLINE", 107},
+    {"CARSON", 108},    {"CARTER", 109},    {"CATHERINE", 110},
+    {"CAYDEN", 111},    {"CECILIA", 112},   {"CHARLES", 113},
+    {"CHARLIE", 114},   {"CHARLOTTE", 115}, {"CHASE", 116},
+    {"CHLOE", 117},     {"CHRISTIAN", 118}, {"CHRISTOPHER", 119},
+    {"CLAIRE", 120},    {"CLARA", 121},     {"CLAYTON", 122},
+    {"COLE", 123},      {"COLIN", 124},     {"COLTON", 125},
+    {"CONNOR", 126},    {"COOPER", 127},    {"CORA", 128},
+    {"DAISY", 129},     {"DAKOTA", 130},    {"DALEYZA", 131},
+    {"DAMIAN", 132},    {"DANIEL", 133},    {"DANIELA", 134},
+    {"DAVID", 135},     {"DAWSON", 136},    {"DEAN", 137},
+    {"DECLAN", 138},    {"DELANEY", 139},   {"DELILAH", 140},
+    {"DEREK", 141},     {"DESTINY", 142},   {"DIANA", 143},
+    {"DIEGO", 144},     {"DOMINIC", 145},   {"DYLAN", 146},
+    {"EASTON", 147},    {"EDEN", 148},      {"EDWARD", 149},
+    {"ELEANOR", 150},   {"ELENA", 151},     {"ELI", 152},
+    {"ELIANA", 153},    {"ELIAS", 154},     {"ELIJAH", 155},
+    {"ELISE", 156},     {"ELIZA", 157},     {"ELIZABETH", 158},
+    {"ELLA", 159},      {"ELLIANA", 160},   {"ELLIE", 161},
+    {"ELLIOT", 162},    {"ELLIOTT", 163},   {"ELOISE", 164},
+    {"EMERSON", 165},   {"EMERSYN", 166},   {"EMERY", 167},
+    {"EMILIA", 168},    {"EMILIANO", 169},  {"EMILY", 170},
+    {"EMMA", 171},      {"EMMANUEL", 172},  {"EMMETT", 173},
+    {"ERIC", 174},      {"ESTHER", 175},    {"ETHAN", 176},
+    {"EVA", 177},       {"EVAN", 178},      {"EVELYN", 179},
+    {"EVERETT", 180},   {"EVERLY", 181},    {"EZEKIEL", 182},
+    {"EZRA", 183},      {"FAITH", 184},     {"FELIX", 185},
+    {"FINLEY", 186},    {"FINN", 187},      {"FIONA", 188},
+    {"GABRIEL", 189},   {"GABRIELLA", 190}, {"GAEL", 191},
+    {"GAVIN", 192},     {"GENESIS", 193},   {"GENEVIEVE", 194},
+    {"GEORGE", 195},    {"GEORGIA", 196},   {"GIANNA", 197},
+    {"GIOVANNI", 198},  {"GRACE", 199},     {"GRACIE", 200},
+    {"GRAHAM", 201},    {"GRANT", 202},     {"GRAYSON", 203},
+    {"GREYSON", 204},   {"GRIFFIN", 205},   {"HADLEY", 206},
+    {"HAILEY", 207},    {"HANNAH", 208},    {"HARLEY", 209},
+    {"HARMONY", 210},   {"HARPER", 211},    {"HARRISON", 212},
+    {"HAYDEN", 213},    {"HAZEL", 214},     {"HENRY", 215},
+    {"HOLDEN", 216},    {"HUDSON", 217},    {"HUNTER", 218},
+    {"IAN", 219},       {"IRIS", 220},      {"ISAAC", 221},
+    {"ISABEL", 222},    {"ISABELLA", 223},  {"ISABELLE", 224},
+    {"ISAIAH", 225},    {"ISLA", 226},      {"ISRAEL", 227},
+    {"IVAN", 228},      {"IVY", 229},       {"JACE", 230},
+    {"JACK", 231},      {"JACKSON", 232},   {"JACOB", 233},
+    {"JADE", 234},      {"JADEN", 235},     {"JAKE", 236},
+    {"JAMES", 237},     {"JAMESON", 238},   {"JASMINE", 239},
+    {"JASON", 240},     {"JASPER", 241},    {"JAVIER", 242},
+    {"JAX", 243},       {"JAXON", 244},     {"JAXSON", 245},
+    {"JAYCE", 246},     {"JAYDEN", 247},    {"JAYLA", 248},
+    {"JEREMIAH", 249},  {"JEREMY", 250},    {"JESSE", 251},
+    {"JESSICA", 252},   {"JESUS", 253},     {"JOANNA", 254},
+    {"JOCELYN", 255},   {"JOEL", 256},      {"JOHN", 257},
+    {"JONAH", 258},     {"JONATHAN", 259},  {"JORDAN", 260},
+    {"JORDYN", 261},    {"JORGE", 262},     {"JOSE", 263},
+    {"JOSEPH", 264},    {"JOSEPHINE", 265}, {"JOSHUA", 266},
+    {"JOSIAH", 267},    {"JOSIE", 268},     {"JOSUE", 269},
+    {"JUAN", 270},      {"JUDAH", 271},     {"JUDE", 272},
+    {"JULIA", 273},     {"JULIAN", 274},    {"JULIANA", 275},
+    {"JULIANNA", 276},  {"JULIET", 277},    {"JULIETTE", 278},
+    {"JUNE", 279},      {"JUSTIN", 280},    {"KADEN", 281},
+    {"KAI", 282},       {"KAIDEN", 283},    {"KALEB", 284},
+    {"KARTER", 285},    {"KATHERINE", 286}, {"KAYDEN", 287},
+    {"KAYLA", 288},     {"KAYLEE", 289},    {"KENDALL", 290},
+    {"KENNEDY", 291},   {"KENNETH", 292},   {"KEVIN", 293},
+    {"KHLOE", 294},     {"KILLIAN", 295},   {"KIMBERLY", 296},
+    {"KING", 297},      {"KINGSTON", 298},  {"KINSLEY", 299},
+    {"KNOX", 300},      {"KYLE", 301},      {"KYLIE", 302},
+    {"KYRIE", 303},     {"LAILA", 304},     {"LANDON", 305},
+    {"LAUREN", 306},    {"LAYLA", 307},     {"LEAH", 308},
+    {"LEILA", 309},     {"LEILANI", 310},   {"LEO", 311},
+    {"LEON", 312},      {"LEONARDO", 313},  {"LEVI", 314},
+    {"LIAM", 315},      {"LILA", 316},      {"LILIANA", 317},
+    {"LILLIAN", 318},   {"LILLY", 319},     {"LILY", 320},
+    {"LINCOLN", 321},   {"LOGAN", 322},     {"LOLA", 323},
+    {"LONDON", 324},    {"LONDYN", 325},    {"LORENZO", 326},
+    {"LUCA", 327},      {"LUCAS", 328},     {"LUCIA", 329},
+    {"LUCY", 330},      {"LUIS", 331},      {"LUKAS", 332},
+    {"LUKE", 333},      {"LUNA", 334},      {"LYDIA", 335},
+    {"LYLA", 336},      {"MACKENZIE", 337}, {"MADDOX", 338},
+    {"MADELINE", 339},  {"MADELYN", 340},   {"MADISON", 341},
+    {"MAGGIE", 342},    {"MAKAYLA", 343},   {"MALACHI", 344},
+    {"MALIA", 345},     {"MARCUS", 346},    {"MARGARET", 347},
+    {"MARIA", 348},     {"MARIAH", 349},    {"MARK", 350},
+    {"MARLEY", 351},    {"MARY", 352},      {"MASON", 353},
+    {"MATEO", 354},     {"MATIAS", 355},    {"MATTEO", 356},
+    {"MATTHEW", 357},   {"MAVERICK", 358},  {"MAX", 359},
+    {"MAXIMUS", 360},   {"MAXWELL", 361},   {"MAYA", 362},
+    {"MCKENZIE", 363},  {"MELANIE", 364},   {"MELODY", 365},
+    {"MESSIAH", 366},   {"MIA", 367},       {"MICAH", 368},
+    {"MICHAEL", 369},   {"MICHELLE", 370},  {"MIGUEL", 371},
+    {"MILA", 372},      {"MILES", 373},     {"MILO", 374},
+    {"MOLLY", 375},     {"MORGAN", 376},    {"MYA", 377},
+    {"MYLES", 378},     {"NAOMI", 379},     {"NATALIA", 380},
+    {"NATALIE", 381},   {"NATHAN", 382},    {"NATHANIEL", 383},
+    {"NEVAEH", 384},    {"NICHOLAS", 385},  {"NICOLAS", 386},
+    {"NICOLE", 387},    {"NOAH", 388},      {"NOELLE", 389},
+    {"NOLAN", 390},     {"NORA", 391},      {"NORAH", 392},
+    {"NOVA", 393},      {"OLIVER", 394},    {"OLIVIA", 395},
+    {"OMAR", 396},      {"OSCAR", 397},     {"OWEN", 398},
+    {"PAIGE", 399},     {"PAISLEY", 400},   {"PARKER", 401},
+    {"PATRICK", 402},   {"PAUL", 403},      {"PAXTON", 404},
+    {"PAYTON", 405},    {"PENELOPE", 406},  {"PETER", 407},
+    {"PEYTON", 408},    {"PIPER", 409},     {"PRESLEY", 410},
+    {"PRESTON", 411},   {"QUINN", 412},     {"RACHEL", 413},
+    {"RAELYNN", 414},   {"REAGAN", 415},    {"REBECCA", 416},
+    {"REESE", 417},     {"REMI", 418},      {"REMINGTON", 419},
+    {"RHETT", 420},     {"RICHARD", 421},   {"RILEY", 422},
+    {"RIVER", 423},     {"ROBERT", 424},    {"ROMAN", 425},
+    {"ROSALIE", 426},   {"ROSE", 427},      {"ROWAN", 428},
+    {"RUBY", 429},      {"RYAN", 430},      {"RYDER", 431},
+    {"RYKER", 432},     {"RYLEE", 433},     {"RYLEIGH", 434},
+    {"SADIE", 435},     {"SAMANTHA", 436},  {"SAMUEL", 437},
+    {"SANTIAGO", 438},  {"SARA", 439},      {"SARAH", 440},
+    {"SAVANNAH", 441},  {"SAWYER", 442},    {"SCARLETT", 443},
+    {"SEBASTIAN", 444}, {"SELENA", 445},    {"SERENITY", 446},
+    {"SIENNA", 447},    {"SILAS", 448},     {"SKYLAR", 449},
+    {"SLOANE", 450},    {"SOFIA", 451},     {"SOPHIA", 452},
+    {"SOPHIE", 453},    {"STELLA", 454},    {"STEVEN", 455},
+    {"SUMMER", 456},    {"SYDNEY", 457},    {"TAYLOR", 458},
+    {"TEAGAN", 459},    {"TESSA", 460},     {"THEODORE", 461},
+    {"THIAGO", 462},    {"THOMAS", 463},    {"TIMOTHY", 464},
+    {"TRINITY", 465},   {"TRISTAN", 466},   {"TUCKER", 467},
+    {"TYLER", 468},     {"VALENTINA", 469}, {"VALERIA", 470},
+    {"VALERIE", 471},   {"VANESSA", 472},   {"VICTOR", 473},
+    {"VICTORIA", 474},  {"VINCENT", 475},   {"VIOLET", 476},
+    {"VIVIAN", 477},    {"WAYLON", 478},    {"WESLEY", 479},
+    {"WESTON", 480},    {"WILLIAM", 481},   {"WILLOW", 482},
+    {"WYATT", 483},     {"XANDER", 484},    {"XAVIER", 485},
+    {"XIMENA", 486},    {"ZACHARY", 487},   {"ZANDER", 488},
+    {"ZANE", 489},      {"ZAYDEN", 490},    {"ZION", 491},
+    {"ZOE", 492},       {"ZOEY", 493}};
+
+unordered_map<string, int> lastNamesNumberedMap = {
     {"ACOSTA", 0},       {"ADAMS", 1},        {"ADKINS", 2},
     {"AGUILAR", 3},      {"AGUIRRE", 4},      {"ALEXANDER", 5},
     {"ALLEN", 6},        {"ALVARADO", 7},     {"ALVAREZ", 8},
@@ -986,205 +1152,19 @@ unordered_map<string, unsigned int> lastNamesOrdered = {
     {"WU", 495},         {"YANG", 496},       {"YOUNG", 497},
     {"ZHANG", 498},      {"ZIMMERMAN", 499}};
 
-unordered_map<string, unsigned int> firstNamesOrdered = {
-    {"AALIYAH", 0},     {"AARON", 1},       {"ABEL", 2},
-    {"ABIGAIL", 3},     {"ABRAHAM", 4},     {"ADALINE", 5},
-    {"ADALYN", 6},      {"ADALYNN", 7},     {"ADAM", 8},
-    {"ADDISON", 9},     {"ADELINE", 10},    {"ADELYN", 11},
-    {"ADRIAN", 12},     {"ADRIANA", 13},    {"AIDAN", 14},
-    {"AIDEN", 15},      {"ALAINA", 16},     {"ALAN", 17},
-    {"ALANA", 18},      {"ALAYNA", 19},     {"ALEJANDRO", 20},
-    {"ALEX", 21},       {"ALEXA", 22},      {"ALEXANDER", 23},
-    {"ALEXANDRA", 24},  {"ALEXIS", 25},     {"ALICE", 26},
-    {"ALINA", 27},      {"ALIVIA", 28},     {"ALIYAH", 29},
-    {"ALLISON", 30},    {"ALYSSA", 31},     {"AMARA", 32},
-    {"AMAYA", 33},      {"AMELIA", 34},     {"AMIR", 35},
-    {"AMY", 36},        {"ANA", 37},        {"ANASTASIA", 38},
-    {"ANDREA", 39},     {"ANDRES", 40},     {"ANDREW", 41},
-    {"ANGEL", 42},      {"ANGELA", 43},     {"ANGELINA", 44},
-    {"ANNA", 45},       {"ANNABELLE", 46},  {"ANTHONY", 47},
-    {"ANTONIO", 48},    {"ARABELLA", 49},   {"ARIA", 50},
-    {"ARIANA", 51},     {"ARIANNA", 52},    {"ARIEL", 53},
-    {"ARTHUR", 54},     {"ARYA", 55},       {"ASHER", 56},
-    {"ASHLEY", 57},     {"ASHTON", 58},     {"ATHENA", 59},
-    {"AUBREE", 60},     {"AUBREY", 61},     {"AUDREY", 62},
-    {"AUGUST", 63},     {"AURORA", 64},     {"AUSTIN", 65},
-    {"AUTUMN", 66},     {"AVA", 67},        {"AVERY", 68},
-    {"AXEL", 69},       {"AYDEN", 70},      {"AYLA", 71},
-    {"BAILEY", 72},     {"BARRETT", 73},    {"BEAU", 74},
-    {"BECKETT", 75},    {"BELLA", 76},      {"BENJAMIN", 77},
-    {"BENNETT", 78},    {"BENTLEY", 79},    {"BLAKE", 80},
-    {"BRADLEY", 81},    {"BRADY", 82},      {"BRANDON", 83},
-    {"BRANTLEY", 84},   {"BRAXTON", 85},    {"BRAYDEN", 86},
-    {"BRIAN", 87},      {"BRIANNA", 88},    {"BRIELLE", 89},
-    {"BRODY", 90},      {"BROOKE", 91},     {"BROOKLYN", 92},
-    {"BROOKLYNN", 93},  {"BROOKS", 94},     {"BRYAN", 95},
-    {"BRYCE", 96},      {"BRYNLEE", 97},    {"BRYSON", 98},
-    {"CADEN", 99},      {"CALEB", 100},     {"CALLIE", 101},
-    {"CALVIN", 102},    {"CAMDEN", 103},    {"CAMERON", 104},
-    {"CAMILA", 105},    {"CARLOS", 106},    {"CAROLINE", 107},
-    {"CARSON", 108},    {"CARTER", 109},    {"CATHERINE", 110},
-    {"CAYDEN", 111},    {"CECILIA", 112},   {"CHARLES", 113},
-    {"CHARLIE", 114},   {"CHARLOTTE", 115}, {"CHASE", 116},
-    {"CHLOE", 117},     {"CHRISTIAN", 118}, {"CHRISTOPHER", 119},
-    {"CLAIRE", 120},    {"CLARA", 121},     {"CLAYTON", 122},
-    {"COLE", 123},      {"COLIN", 124},     {"COLTON", 125},
-    {"CONNOR", 126},    {"COOPER", 127},    {"CORA", 128},
-    {"DAISY", 129},     {"DAKOTA", 130},    {"DALEYZA", 131},
-    {"DAMIAN", 132},    {"DANIEL", 133},    {"DANIELA", 134},
-    {"DAVID", 135},     {"DAWSON", 136},    {"DEAN", 137},
-    {"DECLAN", 138},    {"DELANEY", 139},   {"DELILAH", 140},
-    {"DEREK", 141},     {"DESTINY", 142},   {"DIANA", 143},
-    {"DIEGO", 144},     {"DOMINIC", 145},   {"DYLAN", 146},
-    {"EASTON", 147},    {"EDEN", 148},      {"EDWARD", 149},
-    {"ELEANOR", 150},   {"ELENA", 151},     {"ELI", 152},
-    {"ELIANA", 153},    {"ELIAS", 154},     {"ELIJAH", 155},
-    {"ELISE", 156},     {"ELIZA", 157},     {"ELIZABETH", 158},
-    {"ELLA", 159},      {"ELLIANA", 160},   {"ELLIE", 161},
-    {"ELLIOT", 162},    {"ELLIOTT", 163},   {"ELOISE", 164},
-    {"EMERSON", 165},   {"EMERSYN", 166},   {"EMERY", 167},
-    {"EMILIA", 168},    {"EMILIANO", 169},  {"EMILY", 170},
-    {"EMMA", 171},      {"EMMANUEL", 172},  {"EMMETT", 173},
-    {"ERIC", 174},      {"ESTHER", 175},    {"ETHAN", 176},
-    {"EVA", 177},       {"EVAN", 178},      {"EVELYN", 179},
-    {"EVERETT", 180},   {"EVERLY", 181},    {"EZEKIEL", 182},
-    {"EZRA", 183},      {"FAITH", 184},     {"FELIX", 185},
-    {"FINLEY", 186},    {"FINN", 187},      {"FIONA", 188},
-    {"GABRIEL", 189},   {"GABRIELLA", 190}, {"GAEL", 191},
-    {"GAVIN", 192},     {"GENESIS", 193},   {"GENEVIEVE", 194},
-    {"GEORGE", 195},    {"GEORGIA", 196},   {"GIANNA", 197},
-    {"GIOVANNI", 198},  {"GRACE", 199},     {"GRACIE", 200},
-    {"GRAHAM", 201},    {"GRANT", 202},     {"GRAYSON", 203},
-    {"GREYSON", 204},   {"GRIFFIN", 205},   {"HADLEY", 206},
-    {"HAILEY", 207},    {"HANNAH", 208},    {"HARLEY", 209},
-    {"HARMONY", 210},   {"HARPER", 211},    {"HARRISON", 212},
-    {"HAYDEN", 213},    {"HAZEL", 214},     {"HENRY", 215},
-    {"HOLDEN", 216},    {"HUDSON", 217},    {"HUNTER", 218},
-    {"IAN", 219},       {"IRIS", 220},      {"ISAAC", 221},
-    {"ISABEL", 222},    {"ISABELLA", 223},  {"ISABELLE", 224},
-    {"ISAIAH", 225},    {"ISLA", 226},      {"ISRAEL", 227},
-    {"IVAN", 228},      {"IVY", 229},       {"JACE", 230},
-    {"JACK", 231},      {"JACKSON", 232},   {"JACOB", 233},
-    {"JADE", 234},      {"JADEN", 235},     {"JAKE", 236},
-    {"JAMES", 237},     {"JAMESON", 238},   {"JASMINE", 239},
-    {"JASON", 240},     {"JASPER", 241},    {"JAVIER", 242},
-    {"JAX", 243},       {"JAXON", 244},     {"JAXSON", 245},
-    {"JAYCE", 246},     {"JAYDEN", 247},    {"JAYLA", 248},
-    {"JEREMIAH", 249},  {"JEREMY", 250},    {"JESSE", 251},
-    {"JESSICA", 252},   {"JESUS", 253},     {"JOANNA", 254},
-    {"JOCELYN", 255},   {"JOEL", 256},      {"JOHN", 257},
-    {"JONAH", 258},     {"JONATHAN", 259},  {"JORDAN", 260},
-    {"JORDYN", 261},    {"JORGE", 262},     {"JOSE", 263},
-    {"JOSEPH", 264},    {"JOSEPHINE", 265}, {"JOSHUA", 266},
-    {"JOSIAH", 267},    {"JOSIE", 268},     {"JOSUE", 269},
-    {"JUAN", 270},      {"JUDAH", 271},     {"JUDE", 272},
-    {"JULIA", 273},     {"JULIAN", 274},    {"JULIANA", 275},
-    {"JULIANNA", 276},  {"JULIET", 277},    {"JULIETTE", 278},
-    {"JUNE", 279},      {"JUSTIN", 280},    {"KADEN", 281},
-    {"KAI", 282},       {"KAIDEN", 283},    {"KALEB", 284},
-    {"KARTER", 285},    {"KATHERINE", 286}, {"KAYDEN", 287},
-    {"KAYLA", 288},     {"KAYLEE", 289},    {"KENDALL", 290},
-    {"KENNEDY", 291},   {"KENNETH", 292},   {"KEVIN", 293},
-    {"KHLOE", 294},     {"KILLIAN", 295},   {"KIMBERLY", 296},
-    {"KING", 297},      {"KINGSTON", 298},  {"KINSLEY", 299},
-    {"KNOX", 300},      {"KYLE", 301},      {"KYLIE", 302},
-    {"KYRIE", 303},     {"LAILA", 304},     {"LANDON", 305},
-    {"LAUREN", 306},    {"LAYLA", 307},     {"LEAH", 308},
-    {"LEILA", 309},     {"LEILANI", 310},   {"LEO", 311},
-    {"LEON", 312},      {"LEONARDO", 313},  {"LEVI", 314},
-    {"LIAM", 315},      {"LILA", 316},      {"LILIANA", 317},
-    {"LILLIAN", 318},   {"LILLY", 319},     {"LILY", 320},
-    {"LINCOLN", 321},   {"LOGAN", 322},     {"LOLA", 323},
-    {"LONDON", 324},    {"LONDYN", 325},    {"LORENZO", 326},
-    {"LUCA", 327},      {"LUCAS", 328},     {"LUCIA", 329},
-    {"LUCY", 330},      {"LUIS", 331},      {"LUKAS", 332},
-    {"LUKE", 333},      {"LUNA", 334},      {"LYDIA", 335},
-    {"LYLA", 336},      {"MACKENZIE", 337}, {"MADDOX", 338},
-    {"MADELINE", 339},  {"MADELYN", 340},   {"MADISON", 341},
-    {"MAGGIE", 342},    {"MAKAYLA", 343},   {"MALACHI", 344},
-    {"MALIA", 345},     {"MARCUS", 346},    {"MARGARET", 347},
-    {"MARIA", 348},     {"MARIAH", 349},    {"MARK", 350},
-    {"MARLEY", 351},    {"MARY", 352},      {"MASON", 353},
-    {"MATEO", 354},     {"MATIAS", 355},    {"MATTEO", 356},
-    {"MATTHEW", 357},   {"MAVERICK", 358},  {"MAX", 359},
-    {"MAXIMUS", 360},   {"MAXWELL", 361},   {"MAYA", 362},
-    {"MCKENZIE", 363},  {"MELANIE", 364},   {"MELODY", 365},
-    {"MESSIAH", 366},   {"MIA", 367},       {"MICAH", 368},
-    {"MICHAEL", 369},   {"MICHELLE", 370},  {"MIGUEL", 371},
-    {"MILA", 372},      {"MILES", 373},     {"MILO", 374},
-    {"MOLLY", 375},     {"MORGAN", 376},    {"MYA", 377},
-    {"MYLES", 378},     {"NAOMI", 379},     {"NATALIA", 380},
-    {"NATALIE", 381},   {"NATHAN", 382},    {"NATHANIEL", 383},
-    {"NEVAEH", 384},    {"NICHOLAS", 385},  {"NICOLAS", 386},
-    {"NICOLE", 387},    {"NOAH", 388},      {"NOELLE", 389},
-    {"NOLAN", 390},     {"NORA", 391},      {"NORAH", 392},
-    {"NOVA", 393},      {"OLIVER", 394},    {"OLIVIA", 395},
-    {"OMAR", 396},      {"OSCAR", 397},     {"OWEN", 398},
-    {"PAIGE", 399},     {"PAISLEY", 400},   {"PARKER", 401},
-    {"PATRICK", 402},   {"PAUL", 403},      {"PAXTON", 404},
-    {"PAYTON", 405},    {"PENELOPE", 406},  {"PETER", 407},
-    {"PEYTON", 408},    {"PIPER", 409},     {"PRESLEY", 410},
-    {"PRESTON", 411},   {"QUINN", 412},     {"RACHEL", 413},
-    {"RAELYNN", 414},   {"REAGAN", 415},    {"REBECCA", 416},
-    {"REESE", 417},     {"REMI", 418},      {"REMINGTON", 419},
-    {"RHETT", 420},     {"RICHARD", 421},   {"RILEY", 422},
-    {"RIVER", 423},     {"ROBERT", 424},    {"ROMAN", 425},
-    {"ROSALIE", 426},   {"ROSE", 427},      {"ROWAN", 428},
-    {"RUBY", 429},      {"RYAN", 430},      {"RYDER", 431},
-    {"RYKER", 432},     {"RYLEE", 433},     {"RYLEIGH", 434},
-    {"SADIE", 435},     {"SAMANTHA", 436},  {"SAMUEL", 437},
-    {"SANTIAGO", 438},  {"SARA", 439},      {"SARAH", 440},
-    {"SAVANNAH", 441},  {"SAWYER", 442},    {"SCARLETT", 443},
-    {"SEBASTIAN", 444}, {"SELENA", 445},    {"SERENITY", 446},
-    {"SIENNA", 447},    {"SILAS", 448},     {"SKYLAR", 449},
-    {"SLOANE", 450},    {"SOFIA", 451},     {"SOPHIA", 452},
-    {"SOPHIE", 453},    {"STELLA", 454},    {"STEVEN", 455},
-    {"SUMMER", 456},    {"SYDNEY", 457},    {"TAYLOR", 458},
-    {"TEAGAN", 459},    {"TESSA", 460},     {"THEODORE", 461},
-    {"THIAGO", 462},    {"THOMAS", 463},    {"TIMOTHY", 464},
-    {"TRINITY", 465},   {"TRISTAN", 466},   {"TUCKER", 467},
-    {"TYLER", 468},     {"VALENTINA", 469}, {"VALERIA", 470},
-    {"VALERIE", 471},   {"VANESSA", 472},   {"VICTOR", 473},
-    {"VICTORIA", 474},  {"VINCENT", 475},   {"VIOLET", 476},
-    {"VIVIAN", 477},    {"WAYLON", 478},    {"WESLEY", 479},
-    {"WESTON", 480},    {"WILLIAM", 481},   {"WILLOW", 482},
-    {"WYATT", 483},     {"XANDER", 484},    {"XAVIER", 485},
-    {"XIMENA", 486},    {"ZACHARY", 487},   {"ZANDER", 488},
-    {"ZANE", 489},      {"ZAYDEN", 490},    {"ZION", 491},
-    {"ZOE", 492},       {"ZOEY", 493}};
-
-unsigned long long power10[10] = {
-    1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 100000000};
+long power10[10] = {1,      10,      100,      1000,      10000,
+                    100000, 1000000, 10000000, 100000000, 100000000};
 
 struct myData {
   Data *d;
-  unsigned int firstNameOrder;
-  unsigned int lastNameOrder;
-  unsigned long long ssnOrder;
+  int firstNameOrder;
+  int lastNameOrder;
+  long ssnOrder;
 };
 
-bool compareFirstName(myData *first, myData *last) {
-  return first->firstNameOrder < last->firstNameOrder;
-}
-
-bool compareLastName(myData *first, myData *last) {
-  return first->lastNameOrder < last->lastNameOrder;
-}
-
-bool compareSSN(myData *first, myData *last) {
-  return first->ssnOrder < last->ssnOrder;
-}
-
-bool comparator2(const Data *person1, const Data *person2) {
-  if (person1->ssn >= person2->ssn)
-    return false;
-  else
-    return true;
-}
-
-const unsigned int AFS_RADIX = 32;
-const unsigned int AFS_RADIX_POWER = 5;
-const int STDSORT_CUTOFF = 50;
+const int RadixShift = 32;
+const int RadixShiftPower = 5;
+const int STDSORT_CUTOFF = 20;
 
 enum field {
   lastName = 1,
@@ -1192,28 +1172,23 @@ enum field {
   ssn = 3,
 };
 
-struct nameLengths {
-  int firstName = 0;
-  int lastName = 0;
-};
-
-unsigned long long valueAt(myData *d, int pos, field type) {
-  unsigned int shift = pos * AFS_RADIX_POWER;
+int valueAt(myData *d, int pos, field type) {
+  int shift = pos * RadixShiftPower;
   if (type == field::firstName) {
-    return (d->firstNameOrder >> shift) % AFS_RADIX;
+    return (d->firstNameOrder >> shift) % RadixShift;
   }
   if (type == field::lastName) {
-    return (d->lastNameOrder >> shift) % AFS_RADIX;
+    return (d->lastNameOrder >> shift) % RadixShift;
   }
-  return (d->ssnOrder >> shift) % AFS_RADIX;
+  return (d->ssnOrder >> shift) % RadixShift;
 }
 
 void _afsSwapAll(myData **&v, int *offsets, int start, int digit, field type) {
   int i = start;
-  int nf[AFS_RADIX] = {};
+  int nf[RadixShift] = {};
   int current_block = 0;
-  copy(offsets, offsets + AFS_RADIX, begin(nf));
-  while (current_block < AFS_RADIX - 1) {
+  copy(offsets, offsets + RadixShift, begin(nf));
+  while (current_block < RadixShift - 1) {
     if (i >= start + offsets[current_block + 1]) {
       current_block += 1;
       continue;
@@ -1233,19 +1208,19 @@ void _afsSwapAll(myData **&v, int *offsets, int start, int digit, field type) {
 
 void _afsOffsets(myData **&v, int start, int end, int digit, int *offsets,
                  field type) {
-  int counts[AFS_RADIX] = {};
+  int counts[RadixShift] = {};
   for (int i = start; i < end; i++) {
     counts[valueAt(v[i], digit, type)] += 1;
   }
   int sum = 0;
-  for (int i = 0; i < AFS_RADIX; i++) {
+  for (int i = 0; i < RadixShift; i++) {
     offsets[i] = sum;
     sum += counts[i];
   }
 }
 
-void _recurseAmericanFlagSort(myData **&v, int start, int end, int digit,
-                              int max, field type) {
+void _recurseRadix(myData **&v, int start, int end, int digit, int max,
+                   field type) {
   if (start + 1 >= end) {
     return;
   }
@@ -1256,24 +1231,30 @@ void _recurseAmericanFlagSort(myData **&v, int start, int end, int digit,
     auto b = v + start;
     auto l = v + end;
     if (type == field::lastName) {
-      sort(b, l, compareLastName);
+      sort(b, l, [](myData *first, myData *last) {
+        return first->lastNameOrder < last->lastNameOrder;
+      });
     } else if (type == field::firstName) {
-      sort(b, l, compareFirstName);
+      sort(b, l, [](myData *first, myData *last) {
+        return first->firstNameOrder < last->firstNameOrder;
+      });
     } else {
-      sort(b, l, compareSSN);
+      sort(b, l, [](myData *first, myData *last) {
+        return first->ssnOrder < last->ssnOrder;
+      });
     }
     return;
   }
-  int offsets[AFS_RADIX + 1] = {};
-  offsets[AFS_RADIX] = end - start;
+  int offsets[RadixShift + 1] = {};
+  offsets[RadixShift] = end - start;
   _afsOffsets(v, start, end, digit, offsets, type);
   _afsSwapAll(v, offsets, start, digit, type);
   if (digit == 0) {
     return;
   }
-  for (int i = 0; i < AFS_RADIX; i++) {
-    _recurseAmericanFlagSort(v, start + offsets[i], start + offsets[i + 1],
-                             digit - 1, max, type);
+  for (int i = 0; i < RadixShift; i++) {
+    _recurseRadix(v, start + offsets[i], start + offsets[i + 1], digit - 1, max,
+                  type);
   }
 }
 
@@ -1286,112 +1267,16 @@ int max_digit(field type) {
 
 void RadixSort(myData **v, int start, int end, field type) {
   int md = max_digit(type);
-  _recurseAmericanFlagSort(v, start, end, md, md, type);
+  _recurseRadix(v, start, end, md, md, type);
 }
 
-myData *vec[1200000];
-
-bool firstNameComparator(Data *p1, Data *p2) {
-  return (p2->firstName > p1->firstName);
-}
-
-// determines if we are sorting T1, T2, T3, or T4
-int tWhat(list<Data *> &l) {
-  if (l.size() < 500'000) {
-    return 1;
-  }
-
-  list<Data *>::iterator it = l.begin(); // create an iterator
-
-  if (!is_sorted(it, next(it, 20), firstNameComparator)) {
-    return 2;
-  };
-
-  // if the 50th first name is the same as the 1st firstname, its t4
-  if (l.front()->firstName == l.back()->firstName) {
-    return 4;
-  }
-  return 3;
-}
-
-// Function that performs Radix Sort
-void radix_sort(int arr[], int n, list<Data *> l) {
-
-  // Step 1: Find the maxumum element
-  int maximum = arr[0];
-
-  for (int i = 1; i < n; i++) {
-    maximum = max(maximum, arr[i]);
-  }
-
-  // Step 2: Count the number of digits of the maximum number
-  int digits = 0;
-
-  while (maximum > 0) {
-    digits++;
-    maximum /= 10;
-  }
-
-  // Step 3, 4, 5: Arrange the numbers on the basis of digits
-  for (int i = 0; i < digits; i++) {
-
-    // Units/Tens/Hundreds - used to determine which digit
-    int power = pow(10, i);
-
-    // Holds the updated array
-    int new_array[n];
-
-    // Counting Sort Array - required for arranging digits [0-9]
-    int count[10];
-
-    // Initializing Count Array
-    memset(count, 0, sizeof(count));
-
-    // Calculating frequency of digits
-    for (int j = 0; j < n; j++) {
-
-      // The digit under consideration in this iteration
-      int num = (arr[j] / power) % 10;
-
-      count[num]++;
-    }
-
-    // Cumulative frequency of count array
-    for (int j = 1; j < 10; j++) {
-      count[j] += count[j - 1];
-    }
-
-    // Designating new positions in the updated array
-    for (int j = n - 1; j >= 0; j--) {
-
-      // The digit under consideration in this iteration
-      int num = (arr[j] / power) % 10;
-
-      new_array[count[num] - 1] = arr[j];
-      count[num]--;
-    }
-
-    // Updating the original list using New Array
-    stringstream happystream;
-    string happyoutput;
-    for (int j = 0; j < n; j++) {
-      happystream << new_array[j] << " ";
-    }
-    // Updating the original list using New Array
-    auto it = l.begin();
-    for (int j = 0; j < n; j++) {
-      happystream >> (*it)->ssn;
-      advance(it, 1);
-    }
-  }
-}
-
+myData *vec[1001000];
 
 void sortDataList(list<Data *> &l) {
   // Fill this in
 
   if (l.front()->lastName == l.back()->lastName) {
-    int dataSize = l.size();
+    int size = l.size();
 
     int i = 0;
     for (auto it = l.begin(); it != l.end(); it++) {
@@ -1400,7 +1285,7 @@ void sortDataList(list<Data *> &l) {
       vec[i++] = new myData{
           a,
           firstNamesOrdered[a->firstName],
-          lastNamesOrdered[a->lastName],
+          lastNamesNumberedMap[a->lastName],
           power10[8] * (ssn[0] - '0') + power10[7] * (ssn[1] - '0') +
               power10[6] * (ssn[2] - '0') + power10[5] * (ssn[4] - '0') +
               power10[4] * (ssn[5] - '0') + power10[3] * (ssn[7] - '0') +
@@ -1409,15 +1294,15 @@ void sortDataList(list<Data *> &l) {
       };
     }
 
-    RadixSort(vec, 0, dataSize, field::lastName);
+    RadixSort(vec, 0, size, field::lastName);
     list<int> offsetsLists = {0};
-    for (int i = 1; i < dataSize; i++) {
+    for (int i = 1; i < size; i++) {
       if (vec[i]->lastNameOrder == vec[i - 1]->lastNameOrder) {
         continue;
       }
       offsetsLists.push_back(i);
     }
-    offsetsLists.push_back(dataSize);
+    offsetsLists.push_back(size);
 
     for (auto it = next(offsetsLists.begin()); it != offsetsLists.end(); it++) {
       auto p = prev(it);
@@ -1425,14 +1310,14 @@ void sortDataList(list<Data *> &l) {
     }
 
     list<int> offsetsLists1 = {0};
-    for (int i = 1; i < dataSize; i++) {
+    for (int i = 1; i < size; i++) {
       if (vec[i]->firstNameOrder == vec[i - 1]->firstNameOrder &&
           vec[i]->lastNameOrder == vec[i - 1]->lastNameOrder) {
         continue;
       }
       offsetsLists1.push_back(i);
     }
-    offsetsLists1.push_back(dataSize);
+    offsetsLists1.push_back(size);
 
     for (auto it = next(offsetsLists1.begin()); it != offsetsLists1.end();
          it++) {
@@ -1440,43 +1325,47 @@ void sortDataList(list<Data *> &l) {
     }
 
     l.clear();
-    for (int i = 0; i < dataSize; i++)
+    for (int i = 0; i < size; i++)
       l.push_back(vec[i]->d);
     return;
   }
 
   for (auto it = l.begin(); it != l.end(); ++it) {
-    firstMap[(*it)->firstName].push_back(*it);
+    firstNamesNumberedMap[(*it)->firstName].push_back(*it);
   }
 
   for (auto it = 0; it < 500; ++it) {
-    auto pointer = firstMap[first[it]];
+    auto pointer = firstNamesNumberedMap[firstNamesString[it]];
     for (auto it2 = pointer.begin(); it2 != pointer.end(); ++it2) {
-      lastMap[(*it2)->lastName].push_back(*it2);
+      secondNamesMap[(*it2)->lastName].push_back(*it2);
     }
   }
 
   auto listIt = l.begin();
   for (int j = 0; j < 500; ++j) {
-    auto pointer = lastMap[last[j]];
+    auto pointer = secondNamesMap[lastNamesString[j]];
     int k = pointer.size() - 1;
     for (int i = 0; i <= k; ++i) {
       if (i != k && pointer[i]->firstName == pointer[i + 1]->firstName) {
         Data *xspt[500];
         int pos = 0;
         int z = i;
-        xspt[pos] = pointer[i]; // this one
+        xspt[pos] = pointer[i];
         ++pos;
         ++i;
         xspt[pos] = pointer[i];
         ++pos;
-        // the next one
         while (i < k && pointer[i + 1]->firstName == pointer[z]->firstName) {
           ++i;
           xspt[pos] = pointer[i];
-          pos++; // this one
+          pos++;
         }
-        sort(xspt, &xspt[pos], comparator2);
+        sort(xspt, &xspt[pos], [](const Data *person1, const Data *person2) {
+          if (person1->ssn >= person2->ssn)
+            return false;
+          else
+            return true;
+        });
         for (int gg = 0; gg < pos; gg++) {
           *listIt = xspt[gg];
           ++listIt;

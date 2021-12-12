@@ -115,7 +115,7 @@ int main() {
 #include <unordered_map>
 #include <vector>
 
-unordered_map<string, unsigned int> lastNamesOrdered = {
+unordered_map<string, unsigned int> lastNamesNumberedMap = {
     {"ACOSTA", 0},       {"ADAMS", 1},        {"ADKINS", 2},
     {"AGUILAR", 3},      {"AGUIRRE", 4},      {"ALEXANDER", 5},
     {"ALLEN", 6},        {"ALVARADO", 7},     {"ALVAREZ", 8},
@@ -545,7 +545,7 @@ void _afsOffsets(myData **&v, int start, int end, int digit, int *offsets,
   }
 }
 
-void _recurseAmericanFlagSort(myData **&v, int start, int end, int digit,
+void _recurseRadix(myData **&v, int start, int end, int digit,
                               int max, field type) {
   if (start + 1 >= end) {
     return;
@@ -573,7 +573,7 @@ void _recurseAmericanFlagSort(myData **&v, int start, int end, int digit,
     return;
   }
   for (int i = 0; i < AFS_RADIX; i++) {
-    _recurseAmericanFlagSort(v, start + offsets[i], start + offsets[i + 1],
+    _recurseRadix(v, start + offsets[i], start + offsets[i + 1],
                              digit - 1, max, type);
   }
 }
@@ -587,7 +587,7 @@ int max_digit(field type) {
 
 void RadixSort(myData **v, int start, int end, field type) {
   int md = max_digit(type);
-  _recurseAmericanFlagSort(v, start, end, md, md, type);
+  _recurseRadix(v, start, end, md, md, type);
 }
 
 myData *vec[1200000];
@@ -604,7 +604,7 @@ void sortDataList(list<Data *> &l) {
     vec[i++] = new myData{
         a,
         firstNamesOrdered[a->firstName],
-        lastNamesOrdered[a->lastName],
+        lastNamesNumberedMap[a->lastName],
         power10[8] * (ssn[0] - '0') + power10[7] * (ssn[1] - '0') +
             power10[6] * (ssn[2] - '0') + power10[5] * (ssn[4] - '0') +
             power10[4] * (ssn[5] - '0') + power10[3] * (ssn[7] - '0') +
