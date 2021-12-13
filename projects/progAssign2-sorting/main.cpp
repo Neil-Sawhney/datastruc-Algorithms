@@ -945,38 +945,34 @@ void sortDataList(list<Data *> &l) {
     }
   }
 
-  auto listIt = l.begin();
+  auto It = l.begin();
   for (int j = 0; j < 500; ++j) {
-    auto pointer = secondNamesMap[lastNamesString[j]];
-    int k = pointer.size() - 1;
+    auto point = secondNamesMap[lastNamesString[j]];
+    int k = point.size() - 1;
     for (int i = 0; i <= k; ++i) {
-      if (i != k && pointer[i]->firstName == pointer[i + 1]->firstName) {
-        Data *xspt[500];
+      if (i != k && point[i]->firstName == point[i + 1]->firstName) {
+        Data *xs[500];
         int pos = 0;
-        int z = i;
-        xspt[pos] = pointer[i];
+        xs[pos] = point[i];
         ++pos;
         ++i;
-        xspt[pos] = pointer[i];
+        xs[pos] = point[i];
         ++pos;
-        while (i < k && pointer[i + 1]->firstName == pointer[z]->firstName) {
+        while (i < k && point[i + 1]->firstName == point[i]->firstName) {
           ++i;
-          xspt[pos] = pointer[i];
+          xs[pos] = point[i];
           pos++;
         }
-        sort(xspt, &xspt[pos], [](const Data *person1, const Data *person2) {
-          if (person1->ssn >= person2->ssn)
-            return false;
-          else
-            return true;
+        sort(xs, &xs[pos], [](const Data *left, const Data *right) {
+          return (left->ssn < right->ssn);
         });
-        for (int gg = 0; gg < pos; gg++) {
-          *listIt = xspt[gg];
-          ++listIt;
+        for (int p = 0; p < pos; p++) {
+          *It = xs[p];
+          ++It;
         }
       } else {
-        *listIt = pointer[i];
-        ++listIt;
+        *It = point[i];
+        ++It;
       }
     }
   }
