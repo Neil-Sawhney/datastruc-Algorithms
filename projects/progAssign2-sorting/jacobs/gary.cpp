@@ -115,7 +115,7 @@ int main() {
 #include <unordered_map>
 #include <vector>
 
-unordered_map<string, unsigned int> lastNamesNumberedMap = {
+unordered_map<string, unsigned int> lastNamesOrdered = {
     {"ACOSTA", 0},       {"ADAMS", 1},        {"ADKINS", 2},
     {"AGUILAR", 3},      {"AGUIRRE", 4},      {"ALEXANDER", 5},
     {"ALLEN", 6},        {"ALVARADO", 7},     {"ALVAREZ", 8},
@@ -545,7 +545,7 @@ void _afsOffsets(myData **&v, int start, int end, int digit, int *offsets,
   }
 }
 
-void _recurseRadix(myData **&v, int start, int end, int digit,
+void _recurseAmericanFlagSort(myData **&v, int start, int end, int digit,
                               int max, field type) {
   if (start + 1 >= end) {
     return;
@@ -573,7 +573,7 @@ void _recurseRadix(myData **&v, int start, int end, int digit,
     return;
   }
   for (int i = 0; i < AFS_RADIX; i++) {
-    _recurseRadix(v, start + offsets[i], start + offsets[i + 1],
+    _recurseAmericanFlagSort(v, start + offsets[i], start + offsets[i + 1],
                              digit - 1, max, type);
   }
 }
@@ -585,9 +585,9 @@ int max_digit(field type) {
   return 2;
 }
 
-void RadixSort(myData **v, int start, int end, field type) {
+void americanFlagSort(myData **v, int start, int end, field type) {
   int md = max_digit(type);
-  _recurseRadix(v, start, end, md, md, type);
+  _recurseAmericanFlagSort(v, start, end, md, md, type);
 }
 
 myData *vec[1200000];
@@ -604,7 +604,7 @@ void sortDataList(list<Data *> &l) {
     vec[i++] = new myData{
         a,
         firstNamesOrdered[a->firstName],
-        lastNamesNumberedMap[a->lastName],
+        lastNamesOrdered[a->lastName],
         power10[8] * (ssn[0] - '0') + power10[7] * (ssn[1] - '0') +
             power10[6] * (ssn[2] - '0') + power10[5] * (ssn[4] - '0') +
             power10[4] * (ssn[5] - '0') + power10[3] * (ssn[7] - '0') +
@@ -613,7 +613,7 @@ void sortDataList(list<Data *> &l) {
     };
   }
 
-  RadixSort(vec, 0, dataSize, field::lastName);
+  americanFlagSort(vec, 0, dataSize, field::lastName);
   list<int> offsetsLists = {0};
   for (int i = 1; i < dataSize; i++) {
     if (vec[i]->lastNameOrder == vec[i - 1]->lastNameOrder) {
@@ -625,11 +625,12 @@ void sortDataList(list<Data *> &l) {
 
   for (auto it = next(offsetsLists.begin()); it != offsetsLists.end(); it++) {
     auto p = prev(it);
-    RadixSort(vec, *p, *it, field::firstName);
+    americanFlagSort(vec, *p, *it, field::firstName);
   }
 
   list<int> offsetsLists1 = {0};
   for (int i = 1; i < dataSize; i++) {
+    if (vec[i]->firstNameOrder == vec[i - 1]->firstNameOrder &&
         vec[i]->lastNameOrder == vec[i - 1]->lastNameOrder) {
       continue;
     }
@@ -638,7 +639,7 @@ void sortDataList(list<Data *> &l) {
   offsetsLists1.push_back(dataSize);
 
   for (auto it = next(offsetsLists1.begin()); it != offsetsLists1.end(); it++) {
-    RadixSort(vec, *prev(it), *it, field::ssn);
+    americanFlagSort(vec, *prev(it), *it, field::ssn);
   }
 
   l.clear();
