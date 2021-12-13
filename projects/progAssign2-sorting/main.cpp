@@ -815,28 +815,25 @@ unordered_map<string, vector<Data *>> secondNamesMap = {
     {"WRIGHT", vector<Data *>()},      {"WU", vector<Data *>()},
     {"YANG", vector<Data *>()},        {"YOUNG", vector<Data *>()},
     {"ZHANG", vector<Data *>()},       {"ZIMMERMAN", vector<Data *>()}};
-Data xst[500];
 
 long power10[10] = {1,      10,      100,      1000,      10000,
                     100000, 1000000, 10000000, 100000000, 100000000};
 
 struct myData {
   Data *d;
-  int firstNameOrder;
-  int lastNameOrder;
   long ssnOrder;
 };
 
 const int RadixShift = 32;
 const int RadixShiftPower = 5;
-const int STDSORT_CUTOFF = 20;
+const int cutoff = 20;
 
 int valueAt(myData *d, int pos) {
   int shift = pos * RadixShiftPower;
   return (d->ssnOrder >> shift) % RadixShift;
 }
 
-void _afsSwapAll(myData **&v, int *offsets, int start, int digit) {
+void _swapAll(myData **&v, int *offsets, int start, int digit) {
   int i = start;
   int nf[RadixShift] = {};
   int current_block = 0;
@@ -859,7 +856,7 @@ void _afsSwapAll(myData **&v, int *offsets, int start, int digit) {
   }
 }
 
-void _afsOffsets(myData **&v, int start, int end, int digit, int *offsets) {
+void _offsets(myData **&v, int start, int end, int digit, int *offsets) {
   int counts[RadixShift] = {};
   for (int i = start; i < end; i++) {
     counts[valueAt(v[i], digit)] += 1;
@@ -875,7 +872,7 @@ void _recurseRadix(myData **&v, int start, int end, int digit, int max) {
   if (start + 1 >= end) {
     return;
   }
-  if (end - start < STDSORT_CUTOFF) {
+  if (end - start < cutoff) {
     if (start + 1 >= end) {
       return;
     }
@@ -888,25 +885,24 @@ void _recurseRadix(myData **&v, int start, int end, int digit, int max) {
   }
   int offsets[RadixShift + 1] = {};
   offsets[RadixShift] = end - start;
-  _afsOffsets(v, start, end, digit, offsets);
-  _afsSwapAll(v, offsets, start, digit);
+  _offsets(v, start, end, digit, offsets);
+  _swapAll(v, offsets, start, digit);
   if (digit == 0) {
     return;
   }
   for (int i = 0; i < RadixShift; i++) {
-    _recurseRadix(v, start + offsets[i], start + offsets[i + 1], digit - 1, max);
+    _recurseRadix(v, start + offsets[i], start + offsets[i + 1], digit - 1,
+                  max);
   }
 }
 
-void RadixSort(myData **v, int start, int end) {
+void RadixSort(myData **v, int end) {
+  int start = 0;
   int md = 5;
   _recurseRadix(v, start, end, md, md);
 }
 
 myData *vec[1001000];
-
-
-
 
 void sortDataList(list<Data *> &l) {
   // Fill this in
@@ -919,8 +915,6 @@ void sortDataList(list<Data *> &l) {
       const char *ssn = a->ssn.c_str();
       vec[i++] = new myData{
           a,
-          0,
-          0,
           power10[8] * (ssn[0] - '0') + power10[7] * (ssn[1] - '0') +
               power10[6] * (ssn[2] - '0') + power10[5] * (ssn[4] - '0') +
               power10[4] * (ssn[5] - '0') + power10[3] * (ssn[7] - '0') +
@@ -928,33 +922,15 @@ void sortDataList(list<Data *> &l) {
               (ssn[10] - '0'),
       };
     }
-  list<int> offsetsLists = {0};
-  for (int i = 1; i < size; i++) {
-    offsetsLists.push_back(0);
-  }
-
-  for (auto it = next(offsetsLists.begin()); it != offsetsLists.end(); it++) {
-    auto p = prev(it);
-  }
-
-  list<int> offsetsLists1 = {0};
-  for (int i = 1; i < size; i++) {
-    offsetsLists1.push_back(0);
-  }
-  offsetsLists1.push_back(size);
-
-  for (auto it = next(offsetsLists1.begin()); it != offsetsLists1.end(); it++) {
-    RadixSort(vec, *prev(it), *it);
-  }
-
-//  l.clear();
-//  for (int i = 0; i < size; i++) l.push_back(vec[i]->d);
-    int j = 0;
-    for (auto it : l) {
-    it->ssn = (vec[j]->d)->ssn ;
-    j++;
+    for (int i =0; i< size -1; i++){
+      RadixSort(vec, 0);
     }
-  return;
+      RadixSort(vec, size);
+
+     l.clear();
+    for (int i = 0; i < size; i++) l.push_back(vec[i]->d);
+
+    return;
   }
   //-------------------
 
